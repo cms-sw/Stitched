@@ -1,0 +1,8 @@
+<bin   name="testFWCoreConcurrency" file="*.cppunit.cpp">
+  <use   name="cppunit"/>
+  <use   name="FWCore/Concurrency"/>
+</bin>
+<bin file="test_xercesInitialize.cpp">
+  <use   name="FWCore/Concurrency"/>
+</bin>
+
