@@ -8,13 +8,12 @@
 #include <xercesc/dom/DOM.hpp>
 #include <xercesc/parsers/XercesDOMParser.hpp>
 #include "FWCore/Concurrency/interface/Xerces.h"
-#include "Utilities/Xerces/interface/XercesStrUtils.h"
+#include <xercesc/util/XMLString.hpp>
 #include <sstream>
 #include <memory>
 #include <boost/algorithm/string.hpp>
 
 using namespace xercesc;
-using namespace cms::xerces;
 
 //<<<<<< PRIVATE DEFINES                                                >>>>>>
 //<<<<<< PRIVATE CONSTANTS                                              >>>>>>
@@ -27,7 +26,34 @@ using namespace cms::xerces;
 //<<<<<< MEMBER FUNCTION DEFINITIONS                                    >>>>>>
 
 namespace {
-  
+  inline std::string _toString(XMLCh const* toTranscode) {
+      char* localForm = XMLString::transcode(toTranscode);
+      std::string tmp(localForm);
+      XMLString::release(&localForm);
+      return tmp;
+  }
+
+  inline unsigned int _toUInt(XMLCh const* toTranscode) {
+     std::istringstream iss(_toString(toTranscode));
+     unsigned int returnValue;
+     iss >> returnValue;
+     return returnValue;
+  }
+
+  inline bool _toBool(XMLCh const* toTranscode) {
+    std::string value = _toString(toTranscode);
+    if ((value == "true") || (value == "1"))
+      return true;
+    return false;
+  }
+
+  inline double _toDouble(XMLCh const* toTranscode) {
+     std::istringstream iss(_toString(toTranscode));
+     double returnValue;
+     iss >> returnValue;
+     return returnValue;
+  }
+
   // concatenate all the XML node attribute/value pairs into a
   // paren-separated string (for use by CORAL and frontier_client)
   inline std::string _toParenString(DOMNode const& nodeToConvert) {
@@ -52,9 +78,9 @@ namespace {
             }
             DOMAttr *attribute = static_cast<DOMAttr *>(attributeNode);
 
-            oss << "(" << toString(child->getTagName()) <<
-                          toString(attribute->getName()) << "=" <<
-                          toString(attribute->getValue()) << ")";
+            oss << "(" << _toString(child->getTagName()) <<
+                          _toString(attribute->getName()) << "=" <<
+                          _toString(attribute->getValue()) << ")";
         }
       }
       return oss.str();
@@ -106,7 +132,30 @@ namespace edm {
           m_statisticsAddrInfo(nullptr),
           m_statisticsInfoAvail(false),
           m_siteName()
-    {
+    {  
+        m_str_site = XMLString::transcode("site");
+	m_str_name = XMLString::transcode("name");
+	m_str_event_data = XMLString::transcode("event-data");
+	m_str_catalog = XMLString::transcode("catalog");
+	m_str_url = XMLString::transcode("url");
+	m_str_rfiotype = XMLString::transcode("rfiotype");
+	m_str_value = XMLString::transcode("value");
+	m_str_calib_data = XMLString::transcode("calib-data");
+	m_str_frontier_connect = XMLString::transcode("frontier-connect");
+	m_str_source_config = XMLString::transcode("source-config");
+	m_str_cache_temp_dir = XMLString::transcode("cache-temp-dir");
+	m_str_cache_min_free = XMLString::transcode("cache-min-free");
+	m_str_cache_hint = XMLString::transcode("cache-hint");
+	m_str_clone_cache_hint = XMLString::transcode("clone-cache-hint");
+	m_str_read_hint = XMLString::transcode("read-hint");
+	m_str_ttree_cache_size = XMLString::transcode("ttree-cache-size");
+	m_str_timeout_in_seconds = XMLString::transcode("timeout-in-seconds");
+	m_str_statistics_destination = XMLString::transcode("statistics-destination");
+	m_str_endpoint = XMLString::transcode("endpoint");
+	m_str_info = XMLString::transcode("info");
+	m_str_prefetching = XMLString::transcode("prefetching");
+	m_str_native_protocols = XMLString::transcode("native-protocols");
+    
         char* tmp = getenv("CMS_PATH");
 
         if (tmp) {
@@ -147,6 +196,28 @@ namespace edm {
         freeaddrinfo(m_statisticsAddrInfo);
         m_statisticsAddrInfo = nullptr;
       }
+      XMLString::release(&m_str_site);
+      XMLString::release(&m_str_name);
+      XMLString::release(&m_str_event_data);
+      XMLString::release(&m_str_catalog);
+      XMLString::release(&m_str_url);
+      XMLString::release(&m_str_rfiotype);
+      XMLString::release(&m_str_value);
+      XMLString::release(&m_str_calib_data);
+      XMLString::release(&m_str_frontier_connect);
+      XMLString::release(&m_str_source_config);
+      XMLString::release(&m_str_cache_temp_dir);
+      XMLString::release(&m_str_cache_min_free);
+      XMLString::release(&m_str_cache_hint);
+      XMLString::release(&m_str_clone_cache_hint);
+      XMLString::release(&m_str_read_hint);
+      XMLString::release(&m_str_ttree_cache_size);
+      XMLString::release(&m_str_timeout_in_seconds);
+      XMLString::release(&m_str_statistics_destination);
+      XMLString::release(&m_str_endpoint);
+      XMLString::release(&m_str_info);
+      XMLString::release(&m_str_prefetching);
+      XMLString::release(&m_str_native_protocols);
     }
 
     std::string const
@@ -322,33 +393,32 @@ namespace edm {
     void
     SiteLocalConfigService::parse(std::string const& url) {
       cms::concurrency::xercesInitialize();
-      {
-	auto parser = std::make_unique<XercesDOMParser>();
-	try {
-	  parser->setValidationScheme(XercesDOMParser::Val_Auto);
-	  parser->setDoNamespaces(false);
+      auto parser = std::make_unique<XercesDOMParser>();
+      try {
+        parser->setValidationScheme(XercesDOMParser::Val_Auto);
+        parser->setDoNamespaces(false);
 
-	  parser->parse(url.c_str());
-	  DOMDocument* doc = parser->getDocument();
-	  if (!doc) {
-	    return;
-	  }
+        parser->parse(url.c_str());
+        DOMDocument* doc = parser->getDocument();
+        if (!doc) {
+          return;
+        }
 
-	  // The Site Config has the following format
-	  // <site-local-config>
-	  // <site name="FNAL">
-	  //   <event-data>
-	  //     <catalog url="trivialcatalog_file:/x/y/z.xml"/>
-	  //     <rfiotype value="castor"/>
-	  //   </event-data>
-	  //   <calib-data>
-	  //     <catalog url="trivialcatalog_file:/x/y/z.xml"/>
-	  //     <frontier-connect>
-	  //       ... frontier-interpreted server/proxy xml ...
-	  //     </frontier-connect>
-	  //   </calib-data>
-	  //   <source-config>
-	  //     <cache-temp-dir name="/a/b/c"/>
+        // The Site Config has the following format
+        // <site-local-config>
+        // <site name="FNAL">
+        //   <event-data>
+        //     <catalog url="trivialcatalog_file:/x/y/z.xml"/>
+        //     <rfiotype value="castor"/>
+        //   </event-data>
+        //   <calib-data>
+        //     <catalog url="trivialcatalog_file:/x/y/z.xml"/>
+        //     <frontier-connect>
+        //       ... frontier-interpreted server/proxy xml ...
+            //     </frontier-connect>
+        //   </calib-data>
+            //   <source-config>
+            //     <cache-temp-dir name="/a/b/c"/>
             //     <cache-hint value="..."/>
             //     <read-hint value="..."/>
             //     <ttree-cache-size value="0"/>
@@ -357,171 +427,169 @@ namespace edm {
             //        <protocol prefix="file"/>
             //     </native-protocols>
             //   </source-config>
-	  // </site>
-	  // </site-local-config>
-	  
-	  // FIXME: should probably use the parser for validating the XML.
+        // </site>
+        // </site-local-config>
 
-	  DOMNodeList *sites = doc->getElementsByTagName(uStr("site").ptr());
-	  XMLSize_t numSites = sites->getLength();
-	  for (XMLSize_t i = 0; i < numSites; ++i) {
-	    DOMElement *site = static_cast<DOMElement *>(sites->item(i));
-	    
-	    // Parse the site name
-	    m_siteName = toString(site->getAttribute(uStr("name").ptr()));
-	    
-	    // Parsing of the event data section
-	    {
-	      DOMNodeList *eventDataList = site->getElementsByTagName(uStr("event-data").ptr());
-	      if (eventDataList->getLength() > 0) {
-		DOMElement *eventData = static_cast<DOMElement *>(eventDataList->item(0));
-		
-		DOMNodeList *catalogs = eventData->getElementsByTagName(uStr("catalog").ptr());
-		
-		if (catalogs->getLength() > 0) {
-		  DOMElement * catalog = static_cast<DOMElement *>(catalogs->item(0));
-		  m_dataCatalog = toString(catalog->getAttribute(uStr("url").ptr()));
-		}
-		
-		if (catalogs->getLength() > 1) {
-		  DOMElement * catalog = static_cast<DOMElement *>(catalogs->item(1));
-		  m_fallbackDataCatalog = toString(catalog->getAttribute(uStr("url").ptr()));
-		}
-		
-		DOMNodeList* rfiotypes = eventData->getElementsByTagName(uStr("rfiotype").ptr());
-		
-		if (rfiotypes->getLength() > 0) {
-		  DOMElement* rfiotype = static_cast<DOMElement *>(rfiotypes->item(0));
-		  m_rfioType = toString(rfiotype->getAttribute(uStr("value").ptr()));
-		}
-	      }
-	    }
-	    
-	    // Parsing of the calib-data section
-	    {
-	      DOMNodeList *calibDataList = site->getElementsByTagName(uStr("calib-data").ptr());
-	      
-	      if (calibDataList->getLength() > 0) {
-		DOMElement *calibData = static_cast<DOMElement *>(calibDataList->item(0));
-		DOMNodeList *frontierConnectList = calibData->getElementsByTagName(uStr("frontier-connect").ptr());
-		
-		if (frontierConnectList->getLength() > 0) {
-		  DOMElement *frontierConnect = static_cast<DOMElement *>(frontierConnectList->item(0));
-		  m_frontierConnect = _toParenString(*frontierConnect);
-		}
-	      }
-	    }
-	    // Parsing of the source config section
-	    {
-	      DOMNodeList *sourceConfigList = site->getElementsByTagName(uStr("source-config").ptr());
-	      
-	      if (sourceConfigList->getLength() > 0) {
-		DOMElement *sourceConfig = static_cast<DOMElement *>(sourceConfigList->item(0));
-		DOMNodeList *cacheTempDirList = sourceConfig->getElementsByTagName(uStr("cache-temp-dir").ptr());
-		
-		if (cacheTempDirList->getLength() > 0) {
-		  DOMElement *cacheTempDir = static_cast<DOMElement *>(cacheTempDirList->item(0));
-		  m_cacheTempDir = toString(cacheTempDir->getAttribute(uStr("name").ptr()));
-		  m_cacheTempDirPtr = &m_cacheTempDir;
-		}
-		
-		DOMNodeList *cacheMinFreeList = sourceConfig->getElementsByTagName(uStr("cache-min-free").ptr());
-		
-		if (cacheMinFreeList->getLength() > 0) {
-		  DOMElement *cacheMinFree = static_cast<DOMElement *>(cacheMinFreeList->item(0));
-		  m_cacheMinFree = toDouble(cacheMinFree->getAttribute(uStr("value").ptr()));
-		  m_cacheMinFreePtr = &m_cacheMinFree;
-		}
-		
-		DOMNodeList *cacheHintList = sourceConfig->getElementsByTagName(uStr("cache-hint").ptr());
-		
-		if (cacheHintList->getLength() > 0) {
-		  DOMElement *cacheHint = static_cast<DOMElement *>(cacheHintList->item(0));
-		  m_cacheHint = toString(cacheHint->getAttribute(uStr("value").ptr()));
-		  m_cacheHintPtr = &m_cacheHint;
-		}
-		
-		DOMNodeList *cloneCacheHintList = sourceConfig->getElementsByTagName(uStr("clone-cache-hint").ptr());
-		
-		if (cloneCacheHintList->getLength() > 0) {
-		  DOMElement *cloneCacheHint = static_cast<DOMElement *>(cloneCacheHintList->item(0));
-		  m_cloneCacheHint = toString(cloneCacheHint->getAttribute(uStr("value").ptr()));
-		  m_cloneCacheHintPtr = &m_cloneCacheHint;
-		}
-		
-		DOMNodeList *readHintList = sourceConfig->getElementsByTagName(uStr("read-hint").ptr());
-		
-		if (readHintList->getLength() > 0) {
-		  DOMElement *readHint = static_cast<DOMElement *>(readHintList->item(0));
-		  m_readHint = toString(readHint->getAttribute(uStr("value").ptr()));
-		  m_readHintPtr = &m_readHint;
-		}
-		
-		DOMNodeList *ttreeCacheSizeList = sourceConfig->getElementsByTagName(uStr("ttree-cache-size").ptr());
-		
-		if (ttreeCacheSizeList->getLength() > 0) {
-		  DOMElement *ttreeCacheSize = static_cast<DOMElement *>(ttreeCacheSizeList->item(0));
-		  m_ttreeCacheSize = toUInt(ttreeCacheSize->getAttribute(uStr("value").ptr()));
-		  m_ttreeCacheSizePtr = &m_ttreeCacheSize;
-		}
-		
-		DOMNodeList *timeoutList = sourceConfig->getElementsByTagName(uStr("timeout-in-seconds").ptr());
-		
-		if (timeoutList->getLength() > 0) {
-		  DOMElement *timeout = static_cast<DOMElement *>(timeoutList->item(0));
-		  m_timeout = toUInt(timeout->getAttribute(uStr("value").ptr()));
-		  m_timeoutPtr = &m_timeout;
-		}
-		
-		DOMNodeList *statsDestList = sourceConfig->getElementsByTagName(uStr("statistics-destination").ptr());
-		
-		if (statsDestList->getLength() > 0) {
-		  DOMElement *statsDest = static_cast<DOMElement *>(statsDestList->item(0));
-		  m_statisticsDestination = toString(statsDest->getAttribute(uStr("endpoint").ptr()));
-		  if (!m_statisticsDestination.size()) {
-		    m_statisticsDestination = toString(statsDest->getAttribute(uStr("name").ptr()));
-		  }
-		  std::string tmpStatisticsInfo = toString(statsDest->getAttribute(uStr("info").ptr()));
-		  boost::split(m_statisticsInfo, tmpStatisticsInfo, boost::is_any_of("\t ,"));
-		  m_statisticsInfoAvail = !tmpStatisticsInfo.empty();
-		}
-		
-		DOMNodeList *prefetchingList = sourceConfig->getElementsByTagName(uStr("prefetching").ptr());
-		
-		if (prefetchingList->getLength() > 0) {
-		  DOMElement *prefetching = static_cast<DOMElement *>(prefetchingList->item(0));
-		  m_enablePrefetching = toBool(prefetching->getAttribute(uStr("value").ptr()));
-		  m_enablePrefetchingPtr = &m_enablePrefetching;
-		}
-		
-		DOMNodeList *nativeProtocolsList = sourceConfig->getElementsByTagName(uStr("native-protocols").ptr());
-		
-		if (nativeProtocolsList->getLength() > 0) {
-		  DOMElement *nativeProtocol = static_cast<DOMElement *>(nativeProtocolsList->item(0));
-		  DOMNodeList *childList = nativeProtocol->getChildNodes();
-		  
-		  XMLSize_t numNodes = childList->getLength();
-		  for (XMLSize_t i = 0; i < numNodes; ++i) {
-		    DOMNode *childNode = childList->item(i);
-		    if (childNode->getNodeType() != DOMNode::ELEMENT_NODE) {
-		      continue;
-		    }
-		    DOMElement *child = static_cast<DOMElement *>(childNode);
-		    m_nativeProtocols.push_back(toString(child->getAttribute(uStr("prefix").ptr())));
-		  }
-		  m_nativeProtocolsPtr = &m_nativeProtocols;
-		}
-	      }
-	    }
-	  }
-	  m_connected = true;
-	}
-	catch (xercesc::DOMException const& e) {
-	}
-      } // The extra pair of braces ensures that
-        // all implicit destructors are called
-        // *before* terminating Xerces-C++.
-      cms::concurrency::xercesTerminate();
+        // FIXME: should probably use the parser for validating the XML.
+
+        DOMNodeList *sites = doc->getElementsByTagName(m_str_site);
+        XMLSize_t numSites = sites->getLength();
+        for (XMLSize_t i = 0; i < numSites; ++i) {
+          DOMElement *site = static_cast<DOMElement *>(sites->item(i));
+
+          // Parse the site name
+          m_siteName = _toString(site->getAttribute(m_str_name));
+
+          // Parsing of the event data section
+          {
+            DOMNodeList *eventDataList = site->getElementsByTagName(m_str_event_data);
+            if (eventDataList->getLength() > 0) {
+              DOMElement *eventData = static_cast<DOMElement *>(eventDataList->item(0));
+
+              DOMNodeList *catalogs = eventData->getElementsByTagName(m_str_catalog);
+
+              if (catalogs->getLength() > 0) {
+                DOMElement * catalog = static_cast<DOMElement *>(catalogs->item(0));
+                m_dataCatalog = _toString(catalog->getAttribute(m_str_url));
+              }
+
+              if (catalogs->getLength() > 1) {
+                DOMElement * catalog = static_cast<DOMElement *>(catalogs->item(1));
+                m_fallbackDataCatalog = _toString(catalog->getAttribute(m_str_url));
+              }
+
+              DOMNodeList* rfiotypes = eventData->getElementsByTagName(m_str_rfiotype);
+
+              if (rfiotypes->getLength() > 0) {
+                DOMElement* rfiotype = static_cast<DOMElement *>(rfiotypes->item(0));
+                m_rfioType = _toString(rfiotype->getAttribute(m_str_value));
+              }
+            }
+          }
+
+          // Parsing of the calib-data section
+          {
+            DOMNodeList *calibDataList = site->getElementsByTagName(m_str_calib_data);
+
+            if (calibDataList->getLength() > 0) {
+              DOMElement *calibData = static_cast<DOMElement *>(calibDataList->item(0));
+              DOMNodeList *frontierConnectList = calibData->getElementsByTagName(m_str_frontier_connect);
+
+              if (frontierConnectList->getLength() > 0) {
+                DOMElement *frontierConnect = static_cast<DOMElement *>(frontierConnectList->item(0));
+                m_frontierConnect = _toParenString(*frontierConnect);
+              }
+            }
+          }
+          // Parsing of the source config section
+          {
+            DOMNodeList *sourceConfigList = site->getElementsByTagName(m_str_source_config);
+
+            if (sourceConfigList->getLength() > 0) {
+              DOMElement *sourceConfig = static_cast<DOMElement *>(sourceConfigList->item(0));
+              DOMNodeList *cacheTempDirList = sourceConfig->getElementsByTagName(m_str_cache_temp_dir);
+
+              if (cacheTempDirList->getLength() > 0) {
+                DOMElement *cacheTempDir = static_cast<DOMElement *>(cacheTempDirList->item(0));
+                m_cacheTempDir = _toString(cacheTempDir->getAttribute(m_str_name));
+                m_cacheTempDirPtr = &m_cacheTempDir;
+              }
+
+              DOMNodeList *cacheMinFreeList = sourceConfig->getElementsByTagName(m_str_cache_min_free);
+
+              if (cacheMinFreeList->getLength() > 0) {
+                DOMElement *cacheMinFree = static_cast<DOMElement *>(cacheMinFreeList->item(0));
+                m_cacheMinFree = _toDouble(cacheMinFree->getAttribute(m_str_value));
+                m_cacheMinFreePtr = &m_cacheMinFree;
+              }
+
+              DOMNodeList *cacheHintList = sourceConfig->getElementsByTagName(m_str_cache_hint);
+
+              if (cacheHintList->getLength() > 0) {
+                DOMElement *cacheHint = static_cast<DOMElement *>(cacheHintList->item(0));
+                m_cacheHint = _toString(cacheHint->getAttribute(m_str_value));
+                m_cacheHintPtr = &m_cacheHint;
+              }
+
+              DOMNodeList *cloneCacheHintList = sourceConfig->getElementsByTagName(m_str_clone_cache_hint);
+
+              if (cloneCacheHintList->getLength() > 0) {
+                DOMElement *cloneCacheHint = static_cast<DOMElement *>(cloneCacheHintList->item(0));
+                m_cloneCacheHint = _toString(cloneCacheHint->getAttribute(m_str_value));
+                m_cloneCacheHintPtr = &m_cloneCacheHint;
+              }
+
+              DOMNodeList *readHintList = sourceConfig->getElementsByTagName(m_str_read_hint);
+
+              if (readHintList->getLength() > 0) {
+                DOMElement *readHint = static_cast<DOMElement *>(readHintList->item(0));
+                m_readHint = _toString(readHint->getAttribute(m_str_value));
+                m_readHintPtr = &m_readHint;
+              }
+
+              DOMNodeList *ttreeCacheSizeList = sourceConfig->getElementsByTagName(m_str_ttree_cache_size);
+
+              if (ttreeCacheSizeList->getLength() > 0) {
+                DOMElement *ttreeCacheSize = static_cast<DOMElement *>(ttreeCacheSizeList->item(0));
+                m_ttreeCacheSize = _toUInt(ttreeCacheSize->getAttribute(m_str_value));
+                m_ttreeCacheSizePtr = &m_ttreeCacheSize;
+              }
+
+              DOMNodeList *timeoutList = sourceConfig->getElementsByTagName(m_str_timeout_in_seconds);
+
+              if (timeoutList->getLength() > 0) {
+                DOMElement *timeout = static_cast<DOMElement *>(timeoutList->item(0));
+                m_timeout = _toUInt(timeout->getAttribute(m_str_value));
+                m_timeoutPtr = &m_timeout;
+              }
+
+              DOMNodeList *statsDestList = sourceConfig->getElementsByTagName(m_str_statistics_destination);
+
+              if (statsDestList->getLength() > 0) {
+                DOMElement *statsDest = static_cast<DOMElement *>(statsDestList->item(0));
+                m_statisticsDestination = _toString(statsDest->getAttribute(m_str_endpoint));
+                if (!m_statisticsDestination.size()) {
+                  m_statisticsDestination = _toString(statsDest->getAttribute(m_str_name));
+                }
+                std::string tmpStatisticsInfo = _toString(statsDest->getAttribute(m_str_info));
+                boost::split(m_statisticsInfo, tmpStatisticsInfo, boost::is_any_of("\t ,"));
+                m_statisticsInfoAvail = !tmpStatisticsInfo.empty();
+              }
+
+              DOMNodeList *prefetchingList = sourceConfig->getElementsByTagName(m_str_prefetching);
+
+              if (prefetchingList->getLength() > 0) {
+                DOMElement *prefetching = static_cast<DOMElement *>(prefetchingList->item(0));
+                m_enablePrefetching = _toBool(prefetching->getAttribute(m_str_value));
+                m_enablePrefetchingPtr = &m_enablePrefetching;
+              }
+
+              DOMNodeList *nativeProtocolsList = sourceConfig->getElementsByTagName(m_str_native_protocols);
+
+              if (nativeProtocolsList->getLength() > 0) {
+                DOMElement *nativeProtocol = static_cast<DOMElement *>(nativeProtocolsList->item(0));
+                DOMNodeList *childList = nativeProtocol->getChildNodes();
+
+                XMLCh* prefixXMLCh = XMLString::transcode("prefix");
+                XMLSize_t numNodes = childList->getLength();
+                for (XMLSize_t i = 0; i < numNodes; ++i) {
+                  DOMNode *childNode = childList->item(i);
+                  if (childNode->getNodeType() != DOMNode::ELEMENT_NODE) {
+                    continue;
+                  }
+                  DOMElement *child = static_cast<DOMElement *>(childNode);
+                  m_nativeProtocols.push_back(_toString(child->getAttribute(prefixXMLCh)));
+                }
+		XMLString::release(&prefixXMLCh);
+                m_nativeProtocolsPtr = &m_nativeProtocols;
+              }
+            }
+          }
+        }
+        m_connected = true;
+      }
+      catch (xercesc::DOMException const& e) {
+      }
     }
 
     void
