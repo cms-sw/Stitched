@@ -4,7 +4,6 @@
 #include <map>
 #include <set>
 #include <string>
-#include <utility>
 #include <vector>
 
 namespace DataFormats_StdDictionaries {
@@ -66,5 +65,6 @@ namespace DataFormats_StdDictionaries {
   std::vector<unsigned short>::iterator itus;
   std::vector<void *>::iterator itvp;
   std::vector<const void *> dummyVCPtr;
+  std::vector<std::pair<int,std::bitset<6> > > v_p_i_b;
   };
 }
