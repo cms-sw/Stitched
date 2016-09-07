@@ -17,6 +17,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/ParameterSet/interface/ConfigurationDescriptions.h"
 #include "FWCore/ParameterSet/interface/ParameterSetDescription.h"
+#include "FWCore/Utilities/interface/CPUServiceBase.h"
 
 #include <iostream>
 #include <sys/time.h>
@@ -27,26 +28,24 @@
 #include <sstream>
 #include <set>
 
-#ifdef __linux__
-#include <sched.h>
-#include <errno.h>
-#endif
-
 namespace edm {
   
   namespace service {
-    class CPU {
+    class CPU : public CPUServiceBase {
     public:
       CPU(ParameterSet const&, ActivityRegistry&);
       ~CPU();
       
       static void fillDescriptions(ConfigurationDescriptions& descriptions);
-      
+
+      virtual bool cpuInfo(std::string &models, double &avgSpeed) override;
+
     private:
       int totalNumberCPUs_;
       double averageCoreSpeed_;
       bool reportCPUProperties_;
-      
+
+      bool cpuInfoImpl(std::string &models, double &avgSpeed, Service<JobReport>* reportSvc);      
       void postEndJob();
     };
     
@@ -107,36 +106,6 @@ namespace edm {
 	}
 	return aux;
       }
-
-      // Determine the CPU set size; if this can be successfully determined, then this
-      // returns true.
-      bool getCpuSetSize(unsigned &set_size) {
-#ifdef __linux__
-        cpu_set_t *cpusetp;
-        unsigned current_size = 128;
-        unsigned cpu_count = 0;
-        while (current_size*2 > current_size) {
-          cpusetp = CPU_ALLOC(current_size);
-          CPU_ZERO_S(CPU_ALLOC_SIZE(current_size), cpusetp);
-
-          if (sched_getaffinity(0, CPU_ALLOC_SIZE(current_size), cpusetp)) {
-            CPU_FREE(cpusetp);
-            if (errno == EINVAL) {
-              current_size *= 2;
-              continue;
-            }
-            return false;
-          }
-          cpu_count = CPU_COUNT_S(CPU_ALLOC_SIZE(current_size), cpusetp);
-          CPU_FREE(cpusetp);
-          break;
-        }
-        set_size = cpu_count;
-        return true;
-#else
-        return false;
-#endif
-      }
     } // namespace {}
 
 
@@ -160,9 +129,20 @@ namespace edm {
     }
 
 
-    void CPU::postEndJob()
+    void CPU::postEndJob() {
+        std::string models;
+        double avgSpeed;
+        Service<JobReport> reportSvc;
+        cpuInfoImpl(models, avgSpeed, &reportSvc); 
+    }
+
+    bool CPU::cpuInfo(std::string &models, double &avgSpeed)
     {
-      Service<JobReport> reportSvc;
+        return cpuInfoImpl(models, avgSpeed, nullptr);
+    }
+
+    bool CPU::cpuInfoImpl(std::string &result_models, double &result_avg_speed, Service<JobReport>* reportSvc)
+    {
 
       std::map<std::string, std::string> reportCPUProperties; // Summary
       std::map<std::string, std::string> currentCoreProperties; // Module(s)
@@ -212,7 +192,7 @@ namespace edm {
 					currentCore = value;
 				}
 				else{
-					reportSvc->reportPerformanceForModule("SystemCPU", "CPU-"+currentCore, currentCoreProperties);
+					if (reportSvc) {(*reportSvc)->reportPerformanceForModule("SystemCPU", "CPU-"+currentCore, currentCoreProperties);}
 					currentCoreProperties.clear();
 					currentCore = value;
 				}
@@ -235,8 +215,8 @@ namespace edm {
 
 	fcpuinfo.close();
 
-	if(!currentCore.empty() && reportCPUProperties_) {
-		reportSvc->reportPerformanceForModule("SystemCPU", "CPU-"+currentCore, currentCoreProperties);
+	if(!currentCore.empty() && reportCPUProperties_ && reportSvc) {
+		(*reportSvc)->reportPerformanceForModule("SystemCPU", "CPU-"+currentCore, currentCoreProperties);
 	}
 
 	reportCPUProperties.insert(std::make_pair("totalCPUs", i2str(totalNumberCPUs_)));
@@ -260,20 +240,22 @@ namespace edm {
 	}
 	reportCPUProperties.insert(std::make_pair("CPUModels", CPUModels));
 
-        unsigned set_size = -1;
-        if (getCpuSetSize(set_size)) {
-          reportCPUProperties.insert(std::make_pair("cpusetCount", i2str(set_size)));
-        }
 
-	reportSvc->reportPerformanceSummary("SystemCPU", reportCPUProperties);
+	if (reportSvc) {(*reportSvc)->reportPerformanceSummary("SystemCPU", reportCPUProperties);}
 
-      } //if
-    } //postEndJob
+        result_models = CPUModels;
+        result_avg_speed = averageCoreSpeed_;
+        return true;
+      } else { // failed to open
+        return false;
+      }
+    } //cpuInfoImpl
   } //service
 }  //edm
 
 
 using edm::service::CPU;
-DEFINE_FWK_SERVICE(CPU);
+typedef edm::serviceregistry::AllArgsMaker<edm::CPUServiceBase,CPU> CPUMaker;
+DEFINE_FWK_SERVICE_MAKER(CPU, CPUMaker);
 
 
