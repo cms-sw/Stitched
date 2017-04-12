@@ -54,13 +54,13 @@ target_include_directories(FWCoreUtilities PUBLIC ${MD5_INCLUDE_DIR})
 target_link_libraries(FWCoreUtilities PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   Thread
   Tree
   ${Boost_THREAD_LIBRARY_RELEASE}
   MathCore
   ${Boost_SYSTEM_LIBRARY_RELEASE}
-  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   Net
   ${PYTHON_LIBRARY}
   Core

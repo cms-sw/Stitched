@@ -25,26 +25,26 @@ add_library(FWCoreMessageService SHARED
 target_include_directories(FWCoreMessageService PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(FWCoreMessageService PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(FWCoreMessageService PUBLIC ${Boost_INCLUDE_DIR}/python)
-target_include_directories(FWCoreMessageService PUBLIC ${TINYXML_INCLUDE_DIR})
+target_include_directories(FWCoreMessageService PUBLIC ${ROOT_INCLUDE_DIR})
 target_include_directories(FWCoreMessageService PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(FWCoreMessageService PUBLIC ${TBB_INCLUDE_DIRS})
-target_include_directories(FWCoreMessageService PUBLIC ${ROOT_INCLUDE_DIR})
+target_include_directories(FWCoreMessageService PUBLIC ${TINYXML_INCLUDE_DIR})
 target_link_libraries(FWCoreMessageService PUBLIC
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${Boost_REGEX_LIBRARY_RELEASE}
-  FWCoreMessageLogger
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  FWCoreParameterSet
   FWCoreUtilities
+  FWCoreMessageLogger
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${TBB_LIBRARIES}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
   DataFormatsProvenance
 )
 

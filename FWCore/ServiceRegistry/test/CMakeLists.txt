@@ -28,10 +28,10 @@ add_library(FWCoreServiceRegistryTestDummyServicePlugin SHARED
   stubs/Modules.cc
 )
 
-target_include_directories(FWCoreServiceRegistryTestDummyServicePlugin PUBLIC ${Boost_INCLUDE_DIR}/python)
-target_include_directories(FWCoreServiceRegistryTestDummyServicePlugin PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(FWCoreServiceRegistryTestDummyServicePlugin PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(FWCoreServiceRegistryTestDummyServicePlugin PUBLIC ${CPPUNIT_INCLUDE_DIR})
+target_include_directories(FWCoreServiceRegistryTestDummyServicePlugin PUBLIC ${Boost_INCLUDE_DIR}/python)
+target_include_directories(FWCoreServiceRegistryTestDummyServicePlugin PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(FWCoreServiceRegistryTestDummyServicePlugin PUBLIC ${PYTHON_INCLUDE_DIR})
 target_link_libraries(FWCoreServiceRegistryTestDummyServicePlugin PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -59,21 +59,21 @@ add_executable(testServiceRegistry
 target_include_directories(testServiceRegistry PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(testServiceRegistry PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(testServiceRegistry PUBLIC
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${CPPUNIT_LIBRARY}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${Boost_REGEX_LIBRARY_RELEASE}
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  FWCoreParameterSet
   FWCoreUtilities
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   FWCorePluginManager
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
   FWCoreServiceRegistryTestDummyService
 )
 
@@ -91,21 +91,21 @@ target_include_directories(servicesmanager_order PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(servicesmanager_order PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(servicesmanager_order PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(servicesmanager_order PUBLIC
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${CPPUNIT_LIBRARY}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${Boost_REGEX_LIBRARY_RELEASE}
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  FWCoreParameterSet
   FWCoreUtilities
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   FWCorePluginManager
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
   FWCoreServiceRegistryTestDummyService
 )
 

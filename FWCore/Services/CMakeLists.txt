@@ -10,18 +10,17 @@ add_library(FWCoreServices SHARED
 
 target_include_directories(FWCoreServices PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(FWCoreServices PUBLIC ${Boost_INCLUDE_DIR}/python)
-target_include_directories(FWCoreServices PUBLIC ${ROOT_INCLUDE_DIR})
+target_include_directories(FWCoreServices PUBLIC ${TINYXML_INCLUDE_DIR})
 target_include_directories(FWCoreServices PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(FWCoreServices PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(FWCoreServices PUBLIC ${TBB_INCLUDE_DIRS})
-target_include_directories(FWCoreServices PUBLIC ${TINYXML_INCLUDE_DIR})
+target_include_directories(FWCoreServices PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreServices PUBLIC
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
-  dl
-  Matrix
-  Thread
   ${Boost_REGEX_LIBRARY_RELEASE}
+  dl
+  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
+  Thread
+  FWCoreParameterSet
   Tree
   FWCoreMessageLogger
   FWCoreFramework
@@ -31,15 +30,16 @@ target_link_libraries(FWCoreServices PUBLIC
   MathCore
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
-  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   Net
-  ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   DataFormatsProvenance
+  Matrix
   Core
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  FWCoreUtilities
+  ${PYTHON_LIBRARY}
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   RIO
   DataFormatsStreamer
   FWCoreConcurrency

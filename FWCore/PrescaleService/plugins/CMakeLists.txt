@@ -3,8 +3,8 @@ add_library(FWCorePrescaleServicePlugin SHARED
 )
 
 target_link_libraries(FWCorePrescaleServicePlugin PUBLIC
-  FWCoreServiceRegistry
   FWCorePrescaleService
+  FWCoreServiceRegistry
 )
 
 install( TARGETS FWCorePrescaleServicePlugin EXPORT FWCorePrescaleServicePlugin DESTINATION  lib )

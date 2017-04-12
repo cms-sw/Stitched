@@ -11,30 +11,30 @@ add_library(IOMCRandomEngine SHARED
 
 target_include_directories(IOMCRandomEngine PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngine PUBLIC ${Boost_INCLUDE_DIR}/python)
-target_include_directories(IOMCRandomEngine PUBLIC ${ROOT_INCLUDE_DIR})
+target_include_directories(IOMCRandomEngine PUBLIC ${TINYXML_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngine PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngine PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngine PUBLIC ${CLHEP_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngine PUBLIC ${TBB_INCLUDE_DIRS})
-target_include_directories(IOMCRandomEngine PUBLIC ${TINYXML_INCLUDE_DIR})
+target_include_directories(IOMCRandomEngine PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(IOMCRandomEngine PUBLIC
-  Core
-  GenVector
-  ${GSL}
-  Thread
   FWCoreParameterSet
+  Thread
   FWCoreMessageLogger
   FWCoreFramework
   Tree
-  ${CLHEP_MAIN_LIBRARY}
-  FWCoreUtilities
-  RIO
+  ${GSL}
+  MathMore
   MathCore
   FWCoreServiceRegistry
-  MathMore
   Net
   DataFormatsProvenance
   SimDataFormatsRandomEngine
+  Core
+  GenVector
+  ${CLHEP_MAIN_LIBRARY}
+  FWCoreUtilities
+  RIO
 )
 
 install( TARGETS IOMCRandomEngine EXPORT IOMCRandomEngine DESTINATION  lib )

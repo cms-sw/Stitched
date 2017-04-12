@@ -19,11 +19,11 @@ target_link_libraries(Standalone PUBLIC
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  FWCoreUtilities
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
+  FWCoreUtilities
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   FWCorePythonParameterSet
   FWCorePluginManager
 )

@@ -152,21 +152,21 @@ add_library(TestTriggerNames SHARED
 
 target_include_directories(TestTriggerNames PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestTriggerNames PUBLIC
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
+  FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  FWCoreUtilities
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
   DataFormatsProvenance
 )
 
@@ -177,31 +177,31 @@ add_library(TestMergeResults SHARED
 )
 
 target_include_directories(TestMergeResults PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestMergeResults PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestMergeResults PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestMergeResults PUBLIC ${TINYXML_INCLUDE_DIR})
 target_include_directories(TestMergeResults PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(TestMergeResults PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestMergeResults PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestMergeResults PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestMergeResults PUBLIC
-  FWCoreParameterSet
-  dl
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   ${Boost_REGEX_LIBRARY_RELEASE}
-  FWCoreMessageLogger
+  dl
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  FWCoreParameterSet
+  FWCoreUtilities
+  DataFormatsCommon
   FWCoreFramework
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
-  DataFormatsProvenance
-  DataFormatsTestObjects
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  FWCoreUtilities
-  DataFormatsCommon
+  DataFormatsProvenance
+  FWCoreMessageLogger
+  DataFormatsTestObjects
 )
 
 install( TARGETS TestMergeResults EXPORT TestMergeResults DESTINATION  lib )
@@ -263,11 +263,11 @@ add_library(TestToyModules SHARED
 target_include_directories(TestToyModules PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestToyModules PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestToyModules PUBLIC
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   DataFormatsCommon
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
@@ -544,16 +544,16 @@ target_link_libraries(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreFrameworkTestDummyForEventSetup
   FWCoreParameterSet
   FWCoreUtilities
-  FWCoreFramework
+  ${PYTHON_LIBRARY}
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${PYTHON_LIBRARY}
+  FWCoreFramework
+  FWCoreFrameworkTestDummyForEventSetup
 )
 
 install( TARGETS FWCoreFrameworkTestESDummyDataAnalyzer EXPORT FWCoreFrameworkTestESDummyDataAnalyzer DESTINATION  lib )
@@ -678,32 +678,32 @@ add_executable(TestFWCoreFramework
 )
 
 target_include_directories(TestFWCoreFramework PUBLIC ${PYTHON_INCLUDE_DIR})
+target_include_directories(TestFWCoreFramework PUBLIC ${CPPUNIT_INCLUDE_DIR})
+target_include_directories(TestFWCoreFramework PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFramework PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFramework PUBLIC ${Boost_INCLUDE_DIR})
-target_include_directories(TestFWCoreFramework PUBLIC ${MD5_INCLUDE_DIR})
-target_include_directories(TestFWCoreFramework PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(TestFWCoreFramework PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFramework PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFramework PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
-  ${CPPUNIT_LIBRARY}
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreParameterSet
+  FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
+  ${CPPUNIT_LIBRARY}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
+  DataFormatsWrappedStdDictionaries
   DataFormatsProvenance
   DataFormatsTestObjects
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   FWCoreVersion
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  FWCoreUtilities
-  DataFormatsWrappedStdDictionaries
 )
 
 install( TARGETS TestFWCoreFramework EXPORT TestFWCoreFramework DESTINATION  bin )
@@ -726,30 +726,30 @@ add_executable(TestFWCoreFrameworkeventsetup
   eventsetupscontroller_t.cppunit.cc
 )
 
-target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${CPPUNIT_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkeventsetup PUBLIC
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${CPPUNIT_LIBRARY}
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  FWCoreVersion
   FWCoreParameterSet
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  FWCoreUtilities
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
   FWCoreFrameworkTestDummyForEventSetup
-  FWCoreVersion
 )
 
 install( TARGETS TestFWCoreFrameworkeventsetup EXPORT TestFWCoreFrameworkeventsetup DESTINATION  bin )
@@ -760,8 +760,8 @@ add_executable(TestFWCoreFrameworkeventprocessor
   eventprocessor_t.cppunit.cc
 )
 
-target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${CPPUNIT_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${Boost_INCLUDE_DIR})
@@ -771,20 +771,20 @@ target_link_libraries(TestFWCoreFrameworkeventprocessor PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${CPPUNIT_LIBRARY}
+  FWCoreFrameworkTest
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  FWCoreUtilities
   FWCoreFramework
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
-  DataFormatsProvenance
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  FWCoreUtilities
-  FWCoreFrameworkTest
   DataFormatsWrappedStdDictionaries
+  DataFormatsProvenance
 )
 
 install( TARGETS TestFWCoreFrameworkeventprocessor EXPORT TestFWCoreFrameworkeventprocessor DESTINATION  bin )
@@ -796,31 +796,31 @@ add_executable(TestFWCoreFrameworkeventprincipal
 )
 
 target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${PYTHON_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${CPPUNIT_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${Boost_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${MD5_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkeventprincipal PUBLIC
-  FWCoreParameterSet
-  dl
-  ${CPPUNIT_LIBRARY}
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   ${Boost_REGEX_LIBRARY_RELEASE}
+  dl
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  FWCoreParameterSet
+  FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
+  ${CPPUNIT_LIBRARY}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
   DataFormatsProvenance
   DataFormatsTestObjects
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   FWCoreVersion
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  FWCoreUtilities
 )
 
 install( TARGETS TestFWCoreFrameworkeventprincipal EXPORT TestFWCoreFrameworkeventprincipal DESTINATION  bin )
@@ -830,32 +830,32 @@ add_executable(TestFWCoreFrameworkEvent
 )
 
 target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${PYTHON_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${CPPUNIT_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${Boost_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${MD5_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkEvent PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
-  ${CPPUNIT_LIBRARY}
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreParameterSet
+  FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
+  ${CPPUNIT_LIBRARY}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
+  DataFormatsWrappedStdDictionaries
   DataFormatsProvenance
   DataFormatsTestObjects
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   FWCoreVersion
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  FWCoreUtilities
-  DataFormatsWrappedStdDictionaries
 )
 
 install( TARGETS TestFWCoreFrameworkEvent EXPORT TestFWCoreFrameworkEvent DESTINATION  bin )
@@ -971,14 +971,14 @@ target_link_libraries(TestFWCoreFrameworkGlobalStreamOne PUBLIC
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreUtilities
-  FWCoreFramework
+  ${PYTHON_LIBRARY}
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
+  FWCoreFramework
   DataFormatsWrappedStdDictionaries
-  ${PYTHON_LIBRARY}
 )
 
 install( TARGETS TestFWCoreFrameworkGlobalStreamOne EXPORT TestFWCoreFrameworkGlobalStreamOne DESTINATION  bin )
@@ -999,14 +999,14 @@ target_link_libraries(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreUtilities
-  FWCoreFramework
+  ${PYTHON_LIBRARY}
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
+  FWCoreFramework
   DataFormatsWrappedStdDictionaries
-  ${PYTHON_LIBRARY}
 )
 
 install( TARGETS TestFWCoreFrameworkMayConsumesDeadlock EXPORT TestFWCoreFrameworkMayConsumesDeadlock DESTINATION  bin )
@@ -1142,19 +1142,19 @@ target_include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${MD5_INCLU
 target_include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkProductSelector PUBLIC
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
+  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  FWCoreUtilities
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
   DataFormatsProvenance
 )
 
@@ -1171,21 +1171,21 @@ target_include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${MD5_INCLUDE
 target_include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkEventSelector PUBLIC
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
+  FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  FWCoreUtilities
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
 install( TARGETS TestFWCoreFrameworkEventSelector EXPORT TestFWCoreFrameworkEventSelector DESTINATION  bin )
@@ -1201,21 +1201,21 @@ target_include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${MD5_INCL
 target_include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkEventSelWildcard PUBLIC
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
+  FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  FWCoreUtilities
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
 install( TARGETS TestFWCoreFrameworkEventSelWildcard EXPORT TestFWCoreFrameworkEventSelWildcard DESTINATION  bin )
@@ -1231,21 +1231,21 @@ target_include_directories(TestFWCoreFrameworkEventSelExc PUBLIC ${MD5_INCLUDE_D
 target_include_directories(TestFWCoreFrameworkEventSelExc PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkEventSelExc PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkEventSelExc PUBLIC
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
+  FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  FWCoreUtilities
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
 install( TARGETS TestFWCoreFrameworkEventSelExc EXPORT TestFWCoreFrameworkEventSelExc DESTINATION  bin )
@@ -1261,21 +1261,21 @@ target_include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${MD5_INCLU
 target_include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkEventSelOverlap PUBLIC
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
+  FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  FWCoreUtilities
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
 install( TARGETS TestFWCoreFrameworkEventSelOverlap EXPORT TestFWCoreFrameworkEventSelOverlap DESTINATION  bin )
@@ -1286,19 +1286,19 @@ add_executable(TestFWCoreFrameworkRegistryTemplate
 
 target_include_directories(TestFWCoreFrameworkRegistryTemplate PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkRegistryTemplate PUBLIC
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
+  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  FWCoreUtilities
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
   DataFormatsProvenance
 )
 

@@ -11,9 +11,9 @@ add_dependencies(FWCoreTFWLiteSelector FWCoreTFWLiteSelectorDict)
 target_include_directories(FWCoreTFWLiteSelector PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(FWCoreTFWLiteSelector PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreTFWLiteSelector PUBLIC
-  FWCoreParameterSet
-  Thread
   Core
+  Thread
+  FWCoreParameterSet
   DataFormatsCommon
   FWCoreFramework
   Tree

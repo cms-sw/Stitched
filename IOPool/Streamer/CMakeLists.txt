@@ -21,10 +21,10 @@ target_include_directories(IOPoolStreamer PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(IOPoolStreamer PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(IOPoolStreamer PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(IOPoolStreamer PUBLIC
-  FWCoreParameterSet
+  Core
   FWCoreVersion
   Thread
-  Core
+  FWCoreParameterSet
   FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework

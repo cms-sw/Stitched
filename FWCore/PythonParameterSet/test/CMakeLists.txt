@@ -5,8 +5,8 @@ add_executable(testPythonParameterSet
   readpsetsfrom_t.cppunit.cc
 )
 
-target_include_directories(testPythonParameterSet PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(testPythonParameterSet PUBLIC ${CPPUNIT_INCLUDE_DIR})
+target_include_directories(testPythonParameterSet PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(testPythonParameterSet PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(testPythonParameterSet PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(testPythonParameterSet PUBLIC ${Boost_INCLUDE_DIR})

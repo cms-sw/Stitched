@@ -9,14 +9,14 @@ target_link_libraries(standAloneWithMessageLogger PUBLIC
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreMessageService
-  FWCoreMessageLogger
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   FWCoreUtilities
+  FWCoreMessageLogger
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
 )
 
 install( TARGETS standAloneWithMessageLogger EXPORT standAloneWithMessageLogger DESTINATION  bin )
@@ -38,14 +38,14 @@ target_link_libraries(trivial_main PUBLIC
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreMessageService
-  FWCoreMessageLogger
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   FWCoreUtilities
+  FWCoreMessageLogger
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
 )
 
 install( TARGETS trivial_main EXPORT trivial_main DESTINATION  bin )
@@ -306,11 +306,11 @@ add_executable(makeJobReport
 
 target_include_directories(makeJobReport PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(makeJobReport PUBLIC ${Boost_INCLUDE_DIR}/python)
-target_include_directories(makeJobReport PUBLIC ${ROOT_INCLUDE_DIR})
+target_include_directories(makeJobReport PUBLIC ${TINYXML_INCLUDE_DIR})
 target_include_directories(makeJobReport PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(makeJobReport PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(makeJobReport PUBLIC ${TBB_INCLUDE_DIRS})
-target_include_directories(makeJobReport PUBLIC ${TINYXML_INCLUDE_DIR})
+target_include_directories(makeJobReport PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(makeJobReport PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -322,11 +322,11 @@ target_link_libraries(makeJobReport PUBLIC
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  FWCoreUtilities
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
+  FWCoreUtilities
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   FWCorePluginManager
 )
 

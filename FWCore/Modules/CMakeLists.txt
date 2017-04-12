@@ -22,11 +22,11 @@ add_library(FWCoreModules SHARED
 
 target_include_directories(FWCoreModules PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(FWCoreModules PUBLIC
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   FWCoreMessageLogger
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}

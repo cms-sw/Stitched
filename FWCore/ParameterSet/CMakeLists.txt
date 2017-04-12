@@ -41,17 +41,17 @@ target_include_directories(FWCoreParameterSet PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreParameterSet PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   FWCoreMessageLogger
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
-  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  FWCoreUtilities
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
   DataFormatsProvenance
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   FWCorePluginManager
   ${TBB_LIBRARIES}
 )

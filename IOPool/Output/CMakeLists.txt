@@ -12,21 +12,21 @@ target_include_directories(IOPoolOutput PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(IOPoolOutput PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(IOPoolOutput PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(IOPoolOutput PUBLIC
-  FWCoreParameterSet
+  Core
   FWCoreVersion
   Thread
-  Core
-  FWCoreMessageLogger
+  FWCoreParameterSet
+  DataFormatsCommon
   FWCoreFramework
   Tree
   FWCoreUtilities
   RIO
   MathCore
-  FWCoreServiceRegistry
+  IOPoolCommon
   Net
   DataFormatsProvenance
-  DataFormatsCommon
-  IOPoolCommon
+  FWCoreMessageLogger
+  FWCoreServiceRegistry
 )
 
 install( TARGETS IOPoolOutput EXPORT IOPoolOutput DESTINATION  lib )

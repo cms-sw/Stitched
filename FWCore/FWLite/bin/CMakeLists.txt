@@ -6,12 +6,12 @@ target_include_directories(edmClassStorageSize PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(edmClassStorageSize PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(edmClassStorageSize PUBLIC
   RIO
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreFWLite
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   Thread
-  FWCoreFWLite
+  ${Boost_REGEX_LIBRARY_RELEASE}
   Tree
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
@@ -34,12 +34,12 @@ target_include_directories(edmBranchStorageSize PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(edmBranchStorageSize PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(edmBranchStorageSize PUBLIC
   RIO
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreFWLite
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   Thread
-  FWCoreFWLite
+  ${Boost_REGEX_LIBRARY_RELEASE}
   Tree
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}

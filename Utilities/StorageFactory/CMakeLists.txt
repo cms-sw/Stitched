@@ -31,17 +31,17 @@ target_link_libraries(UtilitiesStorageFactory PUBLIC
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreMessageLogger
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   FWCoreUtilities
+  FWCoreMessageLogger
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   FWCorePluginManager
   ${TBB_LIBRARIES}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
 )
 
 install( TARGETS UtilitiesStorageFactory EXPORT UtilitiesStorageFactory DESTINATION  lib )

@@ -33,14 +33,14 @@ target_include_directories(DataFormatsFWLite PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(DataFormatsFWLite PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(DataFormatsFWLite PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(DataFormatsFWLite PUBLIC
-  FWCoreParameterSet
-  Thread
   Core
+  Thread
+  FWCoreFWLite
   DataFormatsCommon
   Tree
+  FWCoreParameterSet
   FWCoreUtilities
   RIO
-  FWCoreFWLite
   MathCore
   Net
   FWCoreCommon

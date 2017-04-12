@@ -98,14 +98,14 @@ target_include_directories(DictionaryTools_t PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(DictionaryTools_t PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
-  ${CPPUNIT_LIBRARY}
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   DataFormatsCommon
   ${PYTHON_LIBRARY}
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
+  ${CPPUNIT_LIBRARY}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   DataFormatsStdDictionaries
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}

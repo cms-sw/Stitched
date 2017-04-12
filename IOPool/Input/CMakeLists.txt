@@ -15,15 +15,15 @@ add_library(IOPoolInput SHARED
   src/ProvenanceAdaptor.cc
 )
 
-target_include_directories(IOPoolInput PUBLIC ${CLHEP_INCLUDE_DIR})
 target_include_directories(IOPoolInput PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(IOPoolInput PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(IOPoolInput PUBLIC ${ROOT_INCLUDE_DIR})
+target_include_directories(IOPoolInput PUBLIC ${CLHEP_INCLUDE_DIR})
 target_link_libraries(IOPoolInput PUBLIC
   Core
   Thread
   FWCoreParameterSet
-  FWCoreMessageLogger
+  DataFormatsCommon
   FWCoreFramework
   Tree
   ${CLHEP_MAIN_LIBRARY}
@@ -31,13 +31,13 @@ target_link_libraries(IOPoolInput PUBLIC
   RIO
   MathCore
   FWCoreCatalog
-  FWCoreServiceRegistry
+  IOPoolCommon
   UtilitiesStorageFactory
   Net
   FWCoreSources
   DataFormatsProvenance
-  DataFormatsCommon
-  IOPoolCommon
+  FWCoreMessageLogger
+  FWCoreServiceRegistry
 )
 
 install( TARGETS IOPoolInput EXPORT IOPoolInput DESTINATION  lib )
