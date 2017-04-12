@@ -1,0 +1,94 @@
+add_executable(edmProvDump
+  EdmProvDump.cc
+)
+
+target_include_directories(edmProvDump PUBLIC ${PYTHON_INCLUDE_DIR})
+target_include_directories(edmProvDump PUBLIC ${MD5_INCLUDE_DIR})
+target_include_directories(edmProvDump PUBLIC ${Boost_INCLUDE_DIR}/python)
+target_include_directories(edmProvDump PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(edmProvDump PUBLIC ${TBB_INCLUDE_DIRS})
+target_include_directories(edmProvDump PUBLIC ${ROOT_INCLUDE_DIR})
+target_link_libraries(edmProvDump PUBLIC
+  Core
+  Thread
+  FWCoreParameterSet
+  FWCoreServices
+  Tree
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  FWCoreUtilities
+  RIO
+  MathCore
+  FWCoreCatalog
+  FWCoreServiceRegistry
+  DataFormatsStdDictionaries
+  Net
+  DataFormatsWrappedStdDictionaries
+  DataFormatsProvenance
+  IOPoolCommon
+)
+
+install( TARGETS edmProvDump EXPORT edmProvDump DESTINATION  bin )
+
+add_executable(edmFileUtil
+  EdmFileUtil.cpp
+  CollUtil.cc
+)
+
+target_include_directories(edmFileUtil PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(edmFileUtil PUBLIC ${ROOT_INCLUDE_DIR})
+target_link_libraries(edmFileUtil PUBLIC
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  FWCoreParameterSet
+  dl
+  Matrix
+  Thread
+  ${Boost_REGEX_LIBRARY_RELEASE}
+  Tree
+  Hist
+  ${Boost_THREAD_LIBRARY_RELEASE}
+  MathCore
+  FWCoreCatalog
+  FWCoreServiceRegistry
+  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
+  FWCorePluginManager
+  Net
+  ${PYTHON_LIBRARY}
+  DataFormatsProvenance
+  Core
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
+  FWCoreServices
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
+  RIO
+  IOPoolCommon
+  ${Boost_SYSTEM_LIBRARY_RELEASE}
+)
+
+install( TARGETS edmFileUtil EXPORT edmFileUtil DESTINATION  bin )
+
+add_executable(edmCopyUtil
+  EdmCopyUtil.cpp
+)
+
+target_include_directories(edmCopyUtil PUBLIC ${Boost_INCLUDE_DIR})
+target_link_libraries(edmCopyUtil PUBLIC
+  ${Boost_REGEX_LIBRARY_RELEASE}
+  dl
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  FWCoreParameterSet
+  FWCoreServices
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${Boost_THREAD_LIBRARY_RELEASE}
+  ${Boost_SYSTEM_LIBRARY_RELEASE}
+  FWCoreServiceRegistry
+  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
+  UtilitiesStorageFactory
+  FWCoreCatalog
+  ${PYTHON_LIBRARY}
+  IOPoolCommon
+)
+
+install( TARGETS edmCopyUtil EXPORT edmCopyUtil DESTINATION  bin )
+

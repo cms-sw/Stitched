@@ -1,0 +1,27 @@
+reflex_dictionary(DataFormatsStdDictionaries_pair src/classes_pair.h src/classes_def_pair.xml)
+reflex_dictionary(DataFormatsStdDictionaries_vector src/classes_vector.h src/classes_def_vector.xml)
+reflex_dictionary(DataFormatsStdDictionaries_map src/classes_map.h src/classes_def_map.xml)
+reflex_dictionary(DataFormatsStdDictionaries_others src/classes_others.h src/classes_def_others.xml)
+add_library(DataFormatsStdDictionaries SHARED 
+  DataFormatsStdDictionaries_pairDict.cpp
+  DataFormatsStdDictionaries_vectorDict.cpp
+  DataFormatsStdDictionaries_mapDict.cpp
+  DataFormatsStdDictionaries_othersDict.cpp
+)
+
+add_dependencies(DataFormatsStdDictionaries DataFormatsStdDictionaries_pairDict)
+add_dependencies(DataFormatsStdDictionaries DataFormatsStdDictionaries_vectorDict)
+add_dependencies(DataFormatsStdDictionaries DataFormatsStdDictionaries_mapDict)
+add_dependencies(DataFormatsStdDictionaries DataFormatsStdDictionaries_othersDict)
+target_include_directories(DataFormatsStdDictionaries PUBLIC ${ROOT_INCLUDE_DIR})
+target_link_libraries(DataFormatsStdDictionaries PUBLIC
+  Core
+  MathCore
+  Thread
+  RIO
+  Net
+  Tree
+)
+
+install( TARGETS DataFormatsStdDictionaries EXPORT DataFormatsStdDictionaries DESTINATION  lib )
+

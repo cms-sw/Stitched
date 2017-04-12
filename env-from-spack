@@ -1,0 +1,22 @@
+. /home/gartung/spack/share/spack/setup-env.sh
+spack load cmake
+spack load root
+spack load boost
+spack load cppunit
+spack load tbb
+spack load md5
+spack load clhep
+spack load tinyxml
+spack load castor
+spack load python
+. `spack location -i root`/bin/thisroot.sh
+export TINYXMLROOT=`spack location -i tinyxml`
+export CPPUNITROOT=`spack location -i cppunit`
+export CLHEPROOT=`spack location -i clhep`
+export TBBROOT=`spack location -i tbb`
+export BOOSTROOT=`spack location -i boost+python`
+export MD5ROOT=`spack location -i md5`
+export CLHEPROOT=`spack location -i clhep`
+export CASTORROOT=`spack location -i castor`
+export CXXROOT="/opt/rh/devtoolset-4/root/usr/"
+cmake .. -DCMAKE_CXX_COMPILER=$CXXROOT/bin/g++ -DCMAKE_C_COMPILER=$CXXROOT/bin/gcc -DCMakeTools_DIR=../cmaketools -DCLHEP_ROOT_DIR=$CLHEPROOT -DCASTOR_INCLUDE_DIR=$CASTORROOT/include -DBOOST_ROOT=$BOOSTROOT -DTBB_ROOT_DIR=$TBBROOT -DTINYXMLROOT=$TINYXMLROOT  -DMD5ROOT=$MD5ROOT -DCPPUNITROOT=$CPPUNITROOT
