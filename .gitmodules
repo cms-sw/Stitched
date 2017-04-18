@@ -1,0 +1,6 @@
+[submodule "scram2cmake"]
+	path = scram2cmake
+	url = https://github.com/gartung/scram2cmake.git
+[submodule "cmaketools"]
+	path = cmaketools
+	url = https://github.com/gartung/cmaketools.git
