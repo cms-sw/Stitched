@@ -44,5 +44,7 @@ add_subdirectory(Utilities)
 install(DIRECTORY Utilities DESTINATION ${CMAKE_INSTALL_PREFIX}/src)
 install(FILES CMakeLists.txt DESTINATION ${CMAKE_INSTALL_PREFIX}/src)
 install(DIRECTORY cmaketools DESTINATION ${CMAKE_INSTALL_PREFIX}/src PATTERN ".git" EXCLUDE)
+set(BUILD_TESTING ON)
 include(CTest)
+enable_testing()
 

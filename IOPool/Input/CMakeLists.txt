@@ -17,18 +17,18 @@ add_library(IOPoolInput SHARED
   src/ProvenanceAdaptor.cc
 )
 
+target_include_directories(IOPoolInput PUBLIC ${CLHEP_INCLUDE_DIR})
+include_directories(IOPoolInput PUBLIC ${CLHEP_INCLUDE_DIR})
 target_include_directories(IOPoolInput PUBLIC ${Boost_INCLUDE_DIR})
 include_directories(IOPoolInput PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(IOPoolInput PUBLIC ${TBB_INCLUDE_DIRS})
 include_directories(IOPoolInput PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(IOPoolInput PUBLIC ${ROOT_INCLUDE_DIR})
 include_directories(IOPoolInput PUBLIC ${ROOT_INCLUDE_DIR})
-target_include_directories(IOPoolInput PUBLIC ${CLHEP_INCLUDE_DIR})
-include_directories(IOPoolInput PUBLIC ${CLHEP_INCLUDE_DIR})
 target_link_libraries(IOPoolInput PUBLIC
-  Core
-  Thread
   FWCoreParameterSet
+  Thread
+  Core
   DataFormatsCommon
   FWCoreFramework
   Tree

@@ -17,9 +17,10 @@ include_directories(cmsRunGlibC PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(cmsRunGlibC PUBLIC ${ROOT_INCLUDE_DIR})
 include_directories(cmsRunGlibC PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(cmsRunGlibC PUBLIC
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreParameterSet
   dl
-  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
+  Matrix
   Thread
   ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreMessageLogger
@@ -30,15 +31,14 @@ target_link_libraries(cmsRunGlibC PUBLIC
   MathCore
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   Net
-  ${Boost_PYTHON_LIBRARY_RELEASE}
-  Matrix
+  ${PYTHON_LIBRARY}
   Core
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   FWCoreUtilities
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   RIO
   FWCorePythonParameterSet
   FWCorePluginManager
@@ -62,22 +62,22 @@ include_directories(cmsRunTC PUBLIC ${TBB_INCLUDE_DIRS})
 target_link_libraries(cmsRunTC PUBLIC
   FWCoreParameterSet
   dl
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreUtilities
   FWCoreMessageLogger
   FWCoreFramework
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${PYTHON_LIBRARY}
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  FWCoreUtilities
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
-  FWCorePythonParameterSet
   FWCorePluginManager
   ${TBB_LIBRARIES}
+  ${PYTHON_LIBRARY}
+  FWCorePythonParameterSet
 )
 
 install( TARGETS cmsRunTC EXPORT cmsRunTC DESTINATION  bin )
@@ -111,11 +111,11 @@ target_link_libraries(cmsRun PUBLIC
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${PYTHON_LIBRARY}
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  FWCoreUtilities
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  FWCoreUtilities
   FWCorePythonParameterSet
   FWCorePluginManager
   ${TBB_LIBRARIES}
@@ -131,16 +131,16 @@ target_include_directories(cmsRunVDT PUBLIC ${PYTHON_INCLUDE_DIR})
 include_directories(cmsRunVDT PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(cmsRunVDT PUBLIC ${Boost_INCLUDE_DIR}/python)
 include_directories(cmsRunVDT PUBLIC ${Boost_INCLUDE_DIR}/python)
-target_include_directories(cmsRunVDT PUBLIC ${TINYXML_INCLUDE_DIR})
-include_directories(cmsRunVDT PUBLIC ${TINYXML_INCLUDE_DIR})
+target_include_directories(cmsRunVDT PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(cmsRunVDT PUBLIC ${ROOT_INCLUDE_DIR})
 target_include_directories(cmsRunVDT PUBLIC ${Boost_INCLUDE_DIR})
 include_directories(cmsRunVDT PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(cmsRunVDT PUBLIC ${MD5_INCLUDE_DIR})
 include_directories(cmsRunVDT PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(cmsRunVDT PUBLIC ${TBB_INCLUDE_DIRS})
 include_directories(cmsRunVDT PUBLIC ${TBB_INCLUDE_DIRS})
-target_include_directories(cmsRunVDT PUBLIC ${ROOT_INCLUDE_DIR})
-include_directories(cmsRunVDT PUBLIC ${ROOT_INCLUDE_DIR})
+target_include_directories(cmsRunVDT PUBLIC ${TINYXML_INCLUDE_DIR})
+include_directories(cmsRunVDT PUBLIC ${TINYXML_INCLUDE_DIR})
 target_link_libraries(cmsRunVDT PUBLIC
   FWCoreParameterSet
   dl
@@ -152,11 +152,11 @@ target_link_libraries(cmsRunVDT PUBLIC
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${PYTHON_LIBRARY}
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  FWCoreUtilities
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  FWCoreUtilities
   FWCorePythonParameterSet
   FWCorePluginManager
   ${TBB_LIBRARIES}

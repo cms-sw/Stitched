@@ -3,10 +3,10 @@ add_executable(TestRunnerFWCoreTFWLiteSelector
 )
 
 target_link_libraries(TestRunnerFWCoreTFWLiteSelector PUBLIC
-  FWCoreUtilities
   FWCoreFWLite
-  FWCoreTFWLiteSelector
   FWCoreTFWLiteSelectorTest
+  FWCoreTFWLiteSelector
+  FWCoreUtilities
 )
 
 add_test(NAME TestRunnerFWCoreTFWLiteSelector COMMAND TestRunnerFWCoreTFWLiteSelector)

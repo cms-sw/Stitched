@@ -146,7 +146,8 @@ include_directories(FWCoreFramework PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreFramework PUBLIC
   FWCoreParameterSet
   dl
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  FWCoreMessageLogger
+  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   Thread
   ${Boost_REGEX_LIBRARY_RELEASE}
   DataFormatsCommon
@@ -155,22 +156,21 @@ target_link_libraries(FWCoreFramework PUBLIC
   MathCore
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
-  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   Net
-  FWCoreCommon
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   DataFormatsProvenance
   Core
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   FWCoreVersion
-  ${Boost_PYTHON_LIBRARY_RELEASE}
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   FWCoreUtilities
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
   RIO
   FWCorePythonParameterSet
   FWCoreConcurrency
   FWCorePluginManager
-  FWCoreMessageLogger
+  FWCoreCommon
 )
 
 install( TARGETS FWCoreFramework EXPORT FWCoreFramework DESTINATION  lib )

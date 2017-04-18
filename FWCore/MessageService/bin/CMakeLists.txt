@@ -28,11 +28,11 @@ target_link_libraries(Standalone PUBLIC
   ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
-  FWCorePythonParameterSet
+  FWCoreServiceRegistry
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCorePluginManager
   ${PYTHON_LIBRARY}
-  FWCoreServiceRegistry
+  FWCorePythonParameterSet
 )
 
 install( TARGETS Standalone EXPORT Standalone DESTINATION  bin )

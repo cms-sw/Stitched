@@ -41,12 +41,12 @@ include_directories(DataFormatsFWLite PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(DataFormatsFWLite PUBLIC
   FWCoreParameterSet
   Thread
-  Core
+  FWCoreFWLite
   DataFormatsCommon
   Tree
+  Core
   FWCoreUtilities
   RIO
-  FWCoreFWLite
   MathCore
   Net
   FWCoreCommon

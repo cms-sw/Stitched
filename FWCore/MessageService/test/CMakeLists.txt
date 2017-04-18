@@ -10,14 +10,14 @@ target_link_libraries(standAloneWithMessageLogger PUBLIC
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreMessageService
-  FWCoreMessageLogger
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   FWCoreUtilities
+  FWCoreMessageLogger
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
 )
 
 add_test(NAME standAloneWithMessageLogger COMMAND standAloneWithMessageLogger)
@@ -45,14 +45,14 @@ target_link_libraries(trivial_main PUBLIC
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreMessageService
-  FWCoreMessageLogger
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   FWCoreUtilities
+  FWCoreMessageLogger
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
 )
 
 add_test(NAME trivial_main COMMAND trivial_main)
@@ -142,16 +142,16 @@ target_include_directories(unitTestsStatistics PUBLIC ${PYTHON_INCLUDE_DIR})
 include_directories(unitTestsStatistics PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(unitTestsStatistics PUBLIC ${Boost_INCLUDE_DIR}/python)
 include_directories(unitTestsStatistics PUBLIC ${Boost_INCLUDE_DIR}/python)
-target_include_directories(unitTestsStatistics PUBLIC ${ROOT_INCLUDE_DIR})
-include_directories(unitTestsStatistics PUBLIC ${ROOT_INCLUDE_DIR})
+target_include_directories(unitTestsStatistics PUBLIC ${TINYXML_INCLUDE_DIR})
+include_directories(unitTestsStatistics PUBLIC ${TINYXML_INCLUDE_DIR})
 target_include_directories(unitTestsStatistics PUBLIC ${Boost_INCLUDE_DIR})
 include_directories(unitTestsStatistics PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(unitTestsStatistics PUBLIC ${MD5_INCLUDE_DIR})
 include_directories(unitTestsStatistics PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(unitTestsStatistics PUBLIC ${TBB_INCLUDE_DIRS})
 include_directories(unitTestsStatistics PUBLIC ${TBB_INCLUDE_DIRS})
-target_include_directories(unitTestsStatistics PUBLIC ${TINYXML_INCLUDE_DIR})
-include_directories(unitTestsStatistics PUBLIC ${TINYXML_INCLUDE_DIR})
+target_include_directories(unitTestsStatistics PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(unitTestsStatistics PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(unitTestsStatistics PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -344,16 +344,16 @@ target_include_directories(makeJobReport PUBLIC ${PYTHON_INCLUDE_DIR})
 include_directories(makeJobReport PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(makeJobReport PUBLIC ${Boost_INCLUDE_DIR}/python)
 include_directories(makeJobReport PUBLIC ${Boost_INCLUDE_DIR}/python)
-target_include_directories(makeJobReport PUBLIC ${ROOT_INCLUDE_DIR})
-include_directories(makeJobReport PUBLIC ${ROOT_INCLUDE_DIR})
+target_include_directories(makeJobReport PUBLIC ${TINYXML_INCLUDE_DIR})
+include_directories(makeJobReport PUBLIC ${TINYXML_INCLUDE_DIR})
 target_include_directories(makeJobReport PUBLIC ${Boost_INCLUDE_DIR})
 include_directories(makeJobReport PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(makeJobReport PUBLIC ${MD5_INCLUDE_DIR})
 include_directories(makeJobReport PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(makeJobReport PUBLIC ${TBB_INCLUDE_DIRS})
 include_directories(makeJobReport PUBLIC ${TBB_INCLUDE_DIRS})
-target_include_directories(makeJobReport PUBLIC ${TINYXML_INCLUDE_DIR})
-include_directories(makeJobReport PUBLIC ${TINYXML_INCLUDE_DIR})
+target_include_directories(makeJobReport PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(makeJobReport PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(makeJobReport PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl

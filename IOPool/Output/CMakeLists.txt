@@ -19,10 +19,10 @@ include_directories(IOPoolOutput PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(IOPoolOutput PUBLIC ${ROOT_INCLUDE_DIR})
 include_directories(IOPoolOutput PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(IOPoolOutput PUBLIC
-  Core
+  FWCoreParameterSet
   FWCoreVersion
   Thread
-  FWCoreParameterSet
+  Core
   DataFormatsCommon
   FWCoreFramework
   Tree

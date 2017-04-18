@@ -17,14 +17,14 @@ target_link_libraries(SimDataFormatsRandomEngine PUBLIC
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   DataFormatsCommon
+  ${PYTHON_LIBRARY}
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
 install( TARGETS SimDataFormatsRandomEngine EXPORT SimDataFormatsRandomEngine DESTINATION  lib )

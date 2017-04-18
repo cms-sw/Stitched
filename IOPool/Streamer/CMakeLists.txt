@@ -26,14 +26,15 @@ include_directories(IOPoolStreamer PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(IOPoolStreamer PUBLIC ${ROOT_INCLUDE_DIR})
 include_directories(IOPoolStreamer PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(IOPoolStreamer PUBLIC
-  FWCoreParameterSet
+  Core
+  z
   FWCoreVersion
   Thread
-  Core
+  FWCoreParameterSet
   DataFormatsCommon
   FWCoreFramework
   Tree
-  FWCoreUtilities
+  FWCoreSources
   RIO
   MathCore
   FWCoreCatalog
@@ -42,9 +43,8 @@ target_link_libraries(IOPoolStreamer PUBLIC
   UtilitiesStorageFactory
   FWCorePluginManager
   Net
-  z
+  FWCoreUtilities
   DataFormatsProvenance
-  FWCoreSources
 )
 
 install( TARGETS IOPoolStreamer EXPORT IOPoolStreamer DESTINATION  lib )

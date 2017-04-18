@@ -20,20 +20,20 @@ include_directories(testPythonParameterSet PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(testPythonParameterSet PUBLIC ${ROOT_INCLUDE_DIR})
 include_directories(testPythonParameterSet PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(testPythonParameterSet PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
-  dl
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreParameterSet
-  FWCoreUtilities
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
-  ${Boost_THREAD_LIBRARY_RELEASE}
+  dl
   ${CPPUNIT_LIBRARY}
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  ${Boost_REGEX_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  FWCoreUtilities
+  ${Boost_THREAD_LIBRARY_RELEASE}
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCorePythonParameterSet
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
 add_test(NAME testPythonParameterSet COMMAND testPythonParameterSet)

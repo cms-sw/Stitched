@@ -58,25 +58,25 @@ include_directories(FWCoreUtilities PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(FWCoreUtilities PUBLIC ${ROOT_INCLUDE_DIR})
 include_directories(FWCoreUtilities PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreUtilities PUBLIC
+  RIO
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  Thread
-  Tree
-  ${Boost_THREAD_LIBRARY_RELEASE}
-  MathCore
-  ${Boost_SYSTEM_LIBRARY_RELEASE}
-  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  Net
-  ${PYTHON_LIBRARY}
-  Core
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  uuid
+  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
+  Thread
+  Core
+  Tree
   ${MD5_LIBRARY}
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
-  RIO
+  ${Boost_THREAD_LIBRARY_RELEASE}
+  MathCore
+  ${Boost_SYSTEM_LIBRARY_RELEASE}
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  Net
+  ${PYTHON_LIBRARY}
   ${TBB_LIBRARIES}
+  uuid
 )
 
 install( TARGETS FWCoreUtilities EXPORT FWCoreUtilities DESTINATION  lib )

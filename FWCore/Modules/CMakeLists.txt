@@ -30,7 +30,7 @@ target_link_libraries(FWCoreModules PUBLIC
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   ${Boost_REGEX_LIBRARY_RELEASE}
-  FWCoreSources
+  FWCoreMessageLogger
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
@@ -39,7 +39,7 @@ target_link_libraries(FWCoreModules PUBLIC
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
   DataFormatsProvenance
-  FWCoreMessageLogger
+  FWCoreSources
 )
 
 install( TARGETS FWCoreModules EXPORT FWCoreModules DESTINATION  lib )

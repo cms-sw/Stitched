@@ -36,16 +36,16 @@ target_include_directories(SiteLocalConfigUnitTestClient PUBLIC ${PYTHON_INCLUDE
 include_directories(SiteLocalConfigUnitTestClient PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(SiteLocalConfigUnitTestClient PUBLIC ${Boost_INCLUDE_DIR}/python)
 include_directories(SiteLocalConfigUnitTestClient PUBLIC ${Boost_INCLUDE_DIR}/python)
-target_include_directories(SiteLocalConfigUnitTestClient PUBLIC ${TINYXML_INCLUDE_DIR})
-include_directories(SiteLocalConfigUnitTestClient PUBLIC ${TINYXML_INCLUDE_DIR})
+target_include_directories(SiteLocalConfigUnitTestClient PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(SiteLocalConfigUnitTestClient PUBLIC ${ROOT_INCLUDE_DIR})
 target_include_directories(SiteLocalConfigUnitTestClient PUBLIC ${Boost_INCLUDE_DIR})
 include_directories(SiteLocalConfigUnitTestClient PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(SiteLocalConfigUnitTestClient PUBLIC ${MD5_INCLUDE_DIR})
 include_directories(SiteLocalConfigUnitTestClient PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(SiteLocalConfigUnitTestClient PUBLIC ${TBB_INCLUDE_DIRS})
 include_directories(SiteLocalConfigUnitTestClient PUBLIC ${TBB_INCLUDE_DIRS})
-target_include_directories(SiteLocalConfigUnitTestClient PUBLIC ${ROOT_INCLUDE_DIR})
-include_directories(SiteLocalConfigUnitTestClient PUBLIC ${ROOT_INCLUDE_DIR})
+target_include_directories(SiteLocalConfigUnitTestClient PUBLIC ${TINYXML_INCLUDE_DIR})
+include_directories(SiteLocalConfigUnitTestClient PUBLIC ${TINYXML_INCLUDE_DIR})
 target_link_libraries(SiteLocalConfigUnitTestClient PUBLIC
   FWCorePluginManager
   FWCoreServices

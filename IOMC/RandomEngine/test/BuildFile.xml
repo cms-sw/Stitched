@@ -7,10 +7,13 @@
 <use   name="clhep"/>
 <library   file="TestRandomNumberServiceAnalyzer.cc" name="IOMCRandomEngineTestRandomNumberServiceAnalyzer">
   <flags   EDM_PLUGIN="1"/>
+  <use   name="clhep"/>
 </library>
 <library   file="TestRandomNumberServiceGlobal.cc" name="IOMCRandomEngineTestRandomNumberServiceGlobal">
   <flags   EDM_PLUGIN="1"/>
+  <use   name="clhep"/>
 </library>
 <bin   file="TestIOMCRandomEngineService.cpp">
   <flags   TEST_RUNNER_ARGS=" /bin/bash IOMC/RandomEngine/test testRandomService.sh"/>
+  <use   name="clhep"/>
 </bin>

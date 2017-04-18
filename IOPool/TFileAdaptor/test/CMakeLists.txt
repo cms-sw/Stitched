@@ -10,14 +10,14 @@ target_include_directories(test_TFileAdaptor_TFile PUBLIC ${ROOT_INCLUDE_DIR})
 include_directories(test_TFileAdaptor_TFile PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(test_TFileAdaptor_TFile PUBLIC
   Core
-  MathCore
   Thread
+  Tree
   RIO
+  MathCore
+  FWCorePluginManager
   UtilitiesStorageFactory
   IOPoolTFileAdaptor
   Net
-  Tree
-  FWCorePluginManager
 )
 
 add_test(NAME test_TFileAdaptor_TFile COMMAND test_TFileAdaptor_TFile)

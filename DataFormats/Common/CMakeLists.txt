@@ -37,15 +37,15 @@ target_link_libraries(DataFormatsCommon PUBLIC
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreMessageLogger
+  ${PYTHON_LIBRARY}
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   DataFormatsStdDictionaries
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   DataFormatsProvenance
 )
 

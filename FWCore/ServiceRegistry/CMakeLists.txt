@@ -31,11 +31,11 @@ include_directories(FWCoreServiceRegistry PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(FWCoreServiceRegistry PUBLIC ${Boost_INCLUDE_DIR})
 include_directories(FWCoreServiceRegistry PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(FWCoreServiceRegistry PUBLIC
-  FWCoreParameterSet
+  FWCorePluginManager
   FWCoreUtilities
   DataFormatsProvenance
   FWCorePythonParameterSet
-  FWCorePluginManager
+  FWCoreParameterSet
 )
 
 install( TARGETS FWCoreServiceRegistry EXPORT FWCoreServiceRegistry DESTINATION  lib )

@@ -72,12 +72,12 @@ target_link_libraries(DataFormatsProvenance PUBLIC
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   Net
-  ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
   Core
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  FWCoreUtilities
+  ${PYTHON_LIBRARY}
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   RIO
   ${TBB_LIBRARIES}
 )

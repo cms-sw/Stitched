@@ -26,15 +26,15 @@ target_include_directories(FWCoreFWLite PUBLIC ${ROOT_INCLUDE_DIR})
 include_directories(FWCoreFWLite PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreFWLite PUBLIC
   Core
-  MathCore
   Thread
+  DataFormatsCommon
+  Tree
+  FWCoreUtilities
   RIO
-  DataFormatsProvenance
+  MathCore
   FWCorePluginManager
   Net
-  Tree
-  DataFormatsCommon
-  FWCoreUtilities
+  DataFormatsProvenance
 )
 
 install( TARGETS FWCoreFWLite EXPORT FWCoreFWLite DESTINATION  lib )

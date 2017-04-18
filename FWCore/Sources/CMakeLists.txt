@@ -18,10 +18,10 @@ target_link_libraries(FWCoreSources PUBLIC
   FWCoreParameterSet
   FWCoreCatalog
   FWCorePluginManager
-  ${TBB_LIBRARIES}
+  FWCoreMessageLogger
   FWCoreFramework
   DataFormatsProvenance
-  FWCoreMessageLogger
+  ${TBB_LIBRARIES}
   FWCoreUtilities
 )
 
