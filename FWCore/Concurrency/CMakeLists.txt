@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 if(BUILDTEST)
 add_subdirectory(test)
 endif()
@@ -9,6 +11,7 @@ add_library(FWCoreConcurrency SHARED
 )
 
 target_include_directories(FWCoreConcurrency PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(FWCoreConcurrency PUBLIC ${TBB_INCLUDE_DIRS})
 target_link_libraries(FWCoreConcurrency PUBLIC
   ${TBB_LIBRARIES}
   xerces-c

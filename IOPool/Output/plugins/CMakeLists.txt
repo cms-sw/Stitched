@@ -3,10 +3,15 @@ add_library(IOPoolOutputPlugins SHARED
 )
 
 target_include_directories(IOPoolOutputPlugins PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(IOPoolOutputPlugins PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(IOPoolOutputPlugins PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(IOPoolOutputPlugins PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(IOPoolOutputPlugins PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(IOPoolOutputPlugins PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(IOPoolOutputPlugins PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(IOPoolOutputPlugins PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(IOPoolOutputPlugins PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(IOPoolOutputPlugins PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(IOPoolOutputPlugins PUBLIC
   IOPoolOutput
 )

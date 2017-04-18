@@ -3,20 +3,22 @@ add_executable(edmClassStorageSize
 )
 
 target_include_directories(edmClassStorageSize PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(edmClassStorageSize PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(edmClassStorageSize PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(edmClassStorageSize PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(edmClassStorageSize PUBLIC
   RIO
-  FWCoreFWLite
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   Thread
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  Core
   Tree
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
-  Core
+  FWCoreFWLite
   MathCore
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
@@ -31,20 +33,22 @@ add_executable(edmBranchStorageSize
 )
 
 target_include_directories(edmBranchStorageSize PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(edmBranchStorageSize PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(edmBranchStorageSize PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(edmBranchStorageSize PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(edmBranchStorageSize PUBLIC
   RIO
-  FWCoreFWLite
+  ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   Thread
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  Core
   Tree
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
-  Core
+  FWCoreFWLite
   MathCore
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}

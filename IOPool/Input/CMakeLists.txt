@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 add_library(IOPoolInput SHARED 
   src/EmbeddedRootSource.cc
   src/PoolSource.cc
@@ -16,9 +18,13 @@ add_library(IOPoolInput SHARED
 )
 
 target_include_directories(IOPoolInput PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(IOPoolInput PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(IOPoolInput PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(IOPoolInput PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(IOPoolInput PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(IOPoolInput PUBLIC ${ROOT_INCLUDE_DIR})
 target_include_directories(IOPoolInput PUBLIC ${CLHEP_INCLUDE_DIR})
+include_directories(IOPoolInput PUBLIC ${CLHEP_INCLUDE_DIR})
 target_link_libraries(IOPoolInput PUBLIC
   Core
   Thread
@@ -27,14 +33,14 @@ target_link_libraries(IOPoolInput PUBLIC
   FWCoreFramework
   Tree
   ${CLHEP_MAIN_LIBRARY}
-  FWCoreUtilities
+  FWCoreSources
   RIO
   MathCore
   FWCoreCatalog
   IOPoolCommon
   UtilitiesStorageFactory
   Net
-  FWCoreSources
+  FWCoreUtilities
   DataFormatsProvenance
   FWCoreMessageLogger
   FWCoreServiceRegistry

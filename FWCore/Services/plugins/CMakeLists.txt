@@ -17,7 +17,9 @@ add_library(FWCoreServicesPlugins SHARED
 )
 
 target_include_directories(FWCoreServicesPlugins PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreServicesPlugins PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(FWCoreServicesPlugins PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(FWCoreServicesPlugins PUBLIC ${TBB_INCLUDE_DIRS})
 target_link_libraries(FWCoreServicesPlugins PUBLIC
   UtilitiesStorageFactory
   FWCoreServices

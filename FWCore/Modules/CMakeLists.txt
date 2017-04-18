@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 add_library(FWCoreModules SHARED 
   src/LogErrorFilter.cc
   src/EventSetupCacheIdentifierChecker.cc
@@ -21,13 +23,14 @@ add_library(FWCoreModules SHARED
 )
 
 target_include_directories(FWCoreModules PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreModules PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(FWCoreModules PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
-  FWCoreMessageLogger
+  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreSources
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
@@ -36,7 +39,7 @@ target_link_libraries(FWCoreModules PUBLIC
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
   DataFormatsProvenance
-  FWCoreSources
+  FWCoreMessageLogger
 )
 
 install( TARGETS FWCoreModules EXPORT FWCoreModules DESTINATION  lib )

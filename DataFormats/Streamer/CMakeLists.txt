@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 reflex_dictionary(DataFormatsStreamer src/classes.h src/classes_def.xml)
 add_library(DataFormatsStreamer SHARED 
   src/StreamedProducts.cc
@@ -6,6 +8,7 @@ add_library(DataFormatsStreamer SHARED
 
 add_dependencies(DataFormatsStreamer DataFormatsStreamerDict)
 target_include_directories(DataFormatsStreamer PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(DataFormatsStreamer PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(DataFormatsStreamer PUBLIC
   DataFormatsProvenance
   DataFormatsStdDictionaries

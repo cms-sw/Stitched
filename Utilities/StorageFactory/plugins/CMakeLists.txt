@@ -8,7 +8,9 @@ add_library(UtilitiesStorageFactoryPlugins SHARED
 )
 
 target_include_directories(UtilitiesStorageFactoryPlugins PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(UtilitiesStorageFactoryPlugins PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(UtilitiesStorageFactoryPlugins PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(UtilitiesStorageFactoryPlugins PUBLIC ${TBB_INCLUDE_DIRS})
 target_link_libraries(UtilitiesStorageFactoryPlugins PUBLIC
   UtilitiesStorageFactory
 )

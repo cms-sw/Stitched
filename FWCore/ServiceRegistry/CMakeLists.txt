@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 if(BUILDTEST)
 add_subdirectory(test)
 endif()
@@ -23,14 +25,17 @@ add_library(FWCoreServiceRegistry SHARED
 )
 
 target_include_directories(FWCoreServiceRegistry PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(FWCoreServiceRegistry PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(FWCoreServiceRegistry PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(FWCoreServiceRegistry PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(FWCoreServiceRegistry PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreServiceRegistry PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(FWCoreServiceRegistry PUBLIC
-  FWCorePluginManager
+  FWCoreParameterSet
   FWCoreUtilities
   DataFormatsProvenance
   FWCorePythonParameterSet
-  FWCoreParameterSet
+  FWCorePluginManager
 )
 
 install( TARGETS FWCoreServiceRegistry EXPORT FWCoreServiceRegistry DESTINATION  lib )

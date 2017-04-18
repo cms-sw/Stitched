@@ -7,6 +7,7 @@ add_library(FWCoreFrameworkTestDummyForEventSetup SHARED
 )
 
 target_include_directories(FWCoreFrameworkTestDummyForEventSetup PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestDummyForEventSetup PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(FWCoreFrameworkTestDummyForEventSetup PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -21,14 +22,13 @@ target_link_libraries(FWCoreFrameworkTestDummyForEventSetup PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS FWCoreFrameworkTestDummyForEventSetup EXPORT FWCoreFrameworkTestDummyForEventSetup DESTINATION  lib )
-
 add_library(FWCoreFrameworkTest SHARED 
   MockEventProcessor.cc
   stubs/TestBeginEndJobAnalyzer.cc
 )
 
 target_include_directories(FWCoreFrameworkTest PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTest PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(FWCoreFrameworkTest PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -43,17 +43,20 @@ target_link_libraries(FWCoreFrameworkTest PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS FWCoreFrameworkTest EXPORT FWCoreFrameworkTest DESTINATION  lib )
-
 add_library(TestOutputModule SHARED 
   stubs/TestOutputModule.cc
 )
 
 target_include_directories(TestOutputModule PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(TestOutputModule PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestOutputModule PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestOutputModule PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestOutputModule PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestOutputModule PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestOutputModule PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestOutputModule PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestOutputModule PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestOutputModule PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestOutputModule PUBLIC
   FWCoreParameterSet
   dl
@@ -72,14 +75,14 @@ target_link_libraries(TestOutputModule PUBLIC
   DataFormatsProvenance
 )
 
-install( TARGETS TestOutputModule EXPORT TestOutputModule DESTINATION  lib )
-
 add_library(TestFilterModule SHARED 
   stubs/TestFilterModule.cc
 )
 
 target_include_directories(TestFilterModule PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFilterModule PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestFilterModule PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFilterModule PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFilterModule PUBLIC
   FWCoreParameterSet
   dl
@@ -96,15 +99,15 @@ target_link_libraries(TestFilterModule PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestFilterModule EXPORT TestFilterModule DESTINATION  lib )
-
 add_library(TestTBBTasksAnalyzer SHARED 
   stubs/TestTBBTasksAnalyzer.cc
   stubs/TestNThreadsChecker.cc
 )
 
 target_include_directories(TestTBBTasksAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestTBBTasksAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestTBBTasksAnalyzer PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestTBBTasksAnalyzer PUBLIC ${TBB_INCLUDE_DIRS})
 target_link_libraries(TestTBBTasksAnalyzer PUBLIC
   FWCoreParameterSet
   dl
@@ -122,41 +125,40 @@ target_link_libraries(TestTBBTasksAnalyzer PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestTBBTasksAnalyzer EXPORT TestTBBTasksAnalyzer DESTINATION  lib )
-
 add_executable(TestFWCoreFrameworkTBBTasks
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkTBBTasks PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkTBBTasks PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkTBBTasks PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkTBBTasks EXPORT TestFWCoreFrameworkTBBTasks DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkTBBTasks COMMAND TestFWCoreFrameworkTBBTasks)
 add_library(TestTriggerNames SHARED 
   stubs/TestTriggerNames.cc
 )
 
 target_include_directories(TestTriggerNames PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestTriggerNames PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestTriggerNames PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
@@ -170,25 +172,30 @@ target_link_libraries(TestTriggerNames PUBLIC
   DataFormatsProvenance
 )
 
-install( TARGETS TestTriggerNames EXPORT TestTriggerNames DESTINATION  lib )
-
 add_library(TestMergeResults SHARED 
   stubs/TestMergeResults.cc
 )
 
 target_include_directories(TestMergeResults PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestMergeResults PUBLIC ${Boost_INCLUDE_DIR}/python)
-target_include_directories(TestMergeResults PUBLIC ${TINYXML_INCLUDE_DIR})
-target_include_directories(TestMergeResults PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestMergeResults PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestMergeResults PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestMergeResults PUBLIC ${MD5_INCLUDE_DIR})
+target_include_directories(TestMergeResults PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestMergeResults PUBLIC ${Boost_INCLUDE_DIR}/python)
+target_include_directories(TestMergeResults PUBLIC ${TINYXML_INCLUDE_DIR})
+include_directories(TestMergeResults PUBLIC ${TINYXML_INCLUDE_DIR})
+target_include_directories(TestMergeResults PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestMergeResults PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestMergeResults PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestMergeResults PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestMergeResults PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestMergeResults PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestMergeResults PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
@@ -204,13 +211,12 @@ target_link_libraries(TestMergeResults PUBLIC
   DataFormatsTestObjects
 )
 
-install( TARGETS TestMergeResults EXPORT TestMergeResults DESTINATION  lib )
-
 add_library(RunLumiEventAnalyzer SHARED 
   stubs/RunLumiEventAnalyzer.cc
 )
 
 target_include_directories(RunLumiEventAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(RunLumiEventAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(RunLumiEventAnalyzer PUBLIC
   FWCoreParameterSet
   dl
@@ -226,13 +232,12 @@ target_link_libraries(RunLumiEventAnalyzer PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS RunLumiEventAnalyzer EXPORT RunLumiEventAnalyzer DESTINATION  lib )
-
 add_library(TestMod SHARED 
   stubs/TestMod.cc
 )
 
 target_include_directories(TestMod PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestMod PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestMod PUBLIC
   FWCoreParameterSet
   dl
@@ -248,8 +253,6 @@ target_link_libraries(TestMod PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestMod EXPORT TestMod DESTINATION  lib )
-
 add_library(TestToyModules SHARED 
   stubs/ToyModules.cc
   stubs/ToyAnalyzers.cc
@@ -261,7 +264,9 @@ add_library(TestToyModules SHARED
 )
 
 target_include_directories(TestToyModules PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestToyModules PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestToyModules PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestToyModules PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestToyModules PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -279,8 +284,6 @@ target_link_libraries(TestToyModules PUBLIC
   DataFormatsTestObjects
 )
 
-install( TARGETS TestToyModules EXPORT TestToyModules DESTINATION  lib )
-
 add_library(TestGlobalModules SHARED 
   stubs/TestGlobalProducers.cc
   stubs/TestGlobalAnalyzers.cc
@@ -288,10 +291,15 @@ add_library(TestGlobalModules SHARED
 )
 
 target_include_directories(TestGlobalModules PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(TestGlobalModules PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestGlobalModules PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestGlobalModules PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestGlobalModules PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestGlobalModules PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestGlobalModules PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestGlobalModules PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestGlobalModules PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestGlobalModules PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestGlobalModules PUBLIC
   FWCoreParameterSet
   dl
@@ -307,8 +315,6 @@ target_link_libraries(TestGlobalModules PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestGlobalModules EXPORT TestGlobalModules DESTINATION  lib )
-
 add_library(TestOneModules SHARED 
   stubs/TestOneProducers.cc
   stubs/TestOneAnalyzers.cc
@@ -316,10 +322,15 @@ add_library(TestOneModules SHARED
 )
 
 target_include_directories(TestOneModules PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(TestOneModules PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestOneModules PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestOneModules PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestOneModules PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestOneModules PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestOneModules PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestOneModules PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestOneModules PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestOneModules PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestOneModules PUBLIC
   FWCoreParameterSet
   dl
@@ -335,8 +346,6 @@ target_link_libraries(TestOneModules PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestOneModules EXPORT TestOneModules DESTINATION  lib )
-
 add_library(TestStreamModules SHARED 
   stubs/TestStreamProducers.cc
   stubs/TestStreamFilters.cc
@@ -344,6 +353,7 @@ add_library(TestStreamModules SHARED
 )
 
 target_include_directories(TestStreamModules PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestStreamModules PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestStreamModules PUBLIC
   FWCoreParameterSet
   dl
@@ -359,17 +369,20 @@ target_link_libraries(TestStreamModules PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestStreamModules EXPORT TestStreamModules DESTINATION  lib )
-
 add_library(TestSchedulerModule1 SHARED 
   stubs/TestSchedulerModule1.cc
 )
 
 target_include_directories(TestSchedulerModule1 PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(TestSchedulerModule1 PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestSchedulerModule1 PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestSchedulerModule1 PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestSchedulerModule1 PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestSchedulerModule1 PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestSchedulerModule1 PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestSchedulerModule1 PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestSchedulerModule1 PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestSchedulerModule1 PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestSchedulerModule1 PUBLIC
   FWCoreParameterSet
   dl
@@ -385,19 +398,18 @@ target_link_libraries(TestSchedulerModule1 PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestSchedulerModule1 EXPORT TestSchedulerModule1 DESTINATION  lib )
-
 add_library(TestSchedulerModule2 SHARED 
   stubs/TestSchedulerModule2.cc
 )
 
 target_include_directories(TestSchedulerModule2 PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestSchedulerModule2 PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestSchedulerModule2 PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
@@ -408,13 +420,12 @@ target_link_libraries(TestSchedulerModule2 PUBLIC
   DataFormatsProvenance
 )
 
-install( TARGETS TestSchedulerModule2 EXPORT TestSchedulerModule2 DESTINATION  lib )
-
 add_library(TestLoadableDummyFinder SHARED 
   stubs/LoadableDummyFinder.cc
 )
 
 target_include_directories(TestLoadableDummyFinder PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestLoadableDummyFinder PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestLoadableDummyFinder PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -430,13 +441,12 @@ target_link_libraries(TestLoadableDummyFinder PUBLIC
   FWCoreFrameworkTestDummyForEventSetup
 )
 
-install( TARGETS TestLoadableDummyFinder EXPORT TestLoadableDummyFinder DESTINATION  lib )
-
 add_library(TestLoadableDummyESSource SHARED 
   stubs/LoadableDummyESSource.cc
 )
 
 target_include_directories(TestLoadableDummyESSource PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestLoadableDummyESSource PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestLoadableDummyESSource PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -452,17 +462,20 @@ target_link_libraries(TestLoadableDummyESSource PUBLIC
   FWCoreFrameworkTestDummyForEventSetup
 )
 
-install( TARGETS TestLoadableDummyESSource EXPORT TestLoadableDummyESSource DESTINATION  lib )
-
 add_library(TestLoadableDummyEventSetupRecordRetriever SHARED 
   stubs/LoadableDummyEventSetupRecordRetriever.cc
 )
 
 target_include_directories(TestLoadableDummyEventSetupRecordRetriever PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(TestLoadableDummyEventSetupRecordRetriever PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestLoadableDummyEventSetupRecordRetriever PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestLoadableDummyEventSetupRecordRetriever PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestLoadableDummyEventSetupRecordRetriever PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestLoadableDummyEventSetupRecordRetriever PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestLoadableDummyEventSetupRecordRetriever PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestLoadableDummyEventSetupRecordRetriever PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestLoadableDummyEventSetupRecordRetriever PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestLoadableDummyEventSetupRecordRetriever PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestLoadableDummyEventSetupRecordRetriever PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -477,13 +490,12 @@ target_link_libraries(TestLoadableDummyEventSetupRecordRetriever PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestLoadableDummyEventSetupRecordRetriever EXPORT TestLoadableDummyEventSetupRecordRetriever DESTINATION  lib )
-
 add_library(TestLoadableDummyProvider SHARED 
   stubs/LoadableDummyProvider.cc
 )
 
 target_include_directories(TestLoadableDummyProvider PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestLoadableDummyProvider PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestLoadableDummyProvider PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -499,18 +511,21 @@ target_link_libraries(TestLoadableDummyProvider PUBLIC
   FWCoreFrameworkTestDummyForEventSetup
 )
 
-install( TARGETS TestLoadableDummyProvider EXPORT TestLoadableDummyProvider DESTINATION  lib )
-
 add_library(FWCoreFrameworkTestDummyLooper SHARED 
   stubs/DummyLooper.cc
   stubs/TestModuleChangeLooper.cc
 )
 
 target_include_directories(FWCoreFrameworkTestDummyLooper PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestDummyLooper PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(FWCoreFrameworkTestDummyLooper PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(FWCoreFrameworkTestDummyLooper PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(FWCoreFrameworkTestDummyLooper PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestDummyLooper PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(FWCoreFrameworkTestDummyLooper PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(FWCoreFrameworkTestDummyLooper PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(FWCoreFrameworkTestDummyLooper PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestDummyLooper PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreFrameworkTestDummyLooper PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -527,36 +542,38 @@ target_link_libraries(FWCoreFrameworkTestDummyLooper PUBLIC
   DataFormatsTestObjects
 )
 
-install( TARGETS FWCoreFrameworkTestDummyLooper EXPORT FWCoreFrameworkTestDummyLooper DESTINATION  lib )
-
 add_library(FWCoreFrameworkTestESDummyDataAnalyzer SHARED 
   stubs/TestESDummyDataAnalyzer.cc
 )
 
 target_include_directories(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreFrameworkTestESDummyDataAnalyzer PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
+  FWCoreFrameworkTestDummyForEventSetup
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreUtilities
-  ${PYTHON_LIBRARY}
+  FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  FWCoreFramework
-  FWCoreFrameworkTestDummyForEventSetup
+  ${PYTHON_LIBRARY}
 )
-
-install( TARGETS FWCoreFrameworkTestESDummyDataAnalyzer EXPORT FWCoreFrameworkTestESDummyDataAnalyzer DESTINATION  lib )
 
 add_library(FWCoreFrameworkTestPRegisterModules SHARED 
   stubs/TestPRegisterModule2.cc
@@ -565,11 +582,17 @@ add_library(FWCoreFrameworkTestPRegisterModules SHARED
 )
 
 target_include_directories(FWCoreFrameworkTestPRegisterModules PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestPRegisterModules PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(FWCoreFrameworkTestPRegisterModules PUBLIC ${CPPUNIT_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestPRegisterModules PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(FWCoreFrameworkTestPRegisterModules PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(FWCoreFrameworkTestPRegisterModules PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(FWCoreFrameworkTestPRegisterModules PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestPRegisterModules PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(FWCoreFrameworkTestPRegisterModules PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(FWCoreFrameworkTestPRegisterModules PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(FWCoreFrameworkTestPRegisterModules PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestPRegisterModules PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreFrameworkTestPRegisterModules PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -586,13 +609,12 @@ target_link_libraries(FWCoreFrameworkTestPRegisterModules PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS FWCoreFrameworkTestPRegisterModules EXPORT FWCoreFrameworkTestPRegisterModules DESTINATION  lib )
-
 add_library(FWCoreFrameworkTestBeginEndJobAnalyzer SHARED 
   stubs/TestBeginEndJobAnalyzerModule.cc
 )
 
 target_include_directories(FWCoreFrameworkTestBeginEndJobAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestBeginEndJobAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(FWCoreFrameworkTestBeginEndJobAnalyzer PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -608,47 +630,50 @@ target_link_libraries(FWCoreFrameworkTestBeginEndJobAnalyzer PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS FWCoreFrameworkTestBeginEndJobAnalyzer EXPORT FWCoreFrameworkTestBeginEndJobAnalyzer DESTINATION  lib )
-
 add_library(FWCoreFrameworkTestFailuresAnalyzer SHARED 
   stubs/TestFailuresAnalyzer.cc
 )
 
 target_include_directories(FWCoreFrameworkTestFailuresAnalyzer PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(FWCoreFrameworkTestFailuresAnalyzer PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestFailuresAnalyzer PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(FWCoreFrameworkTestFailuresAnalyzer PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(FWCoreFrameworkTestFailuresAnalyzer PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(FWCoreFrameworkTestFailuresAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestFailuresAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(FWCoreFrameworkTestFailuresAnalyzer PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestFailuresAnalyzer PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(FWCoreFrameworkTestFailuresAnalyzer PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(FWCoreFrameworkTestFailuresAnalyzer PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(FWCoreFrameworkTestFailuresAnalyzer PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(FWCoreFrameworkTestFailuresAnalyzer PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreFrameworkTestFailuresAnalyzer PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
-  FWCoreUtilities
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
-
-install( TARGETS FWCoreFrameworkTestFailuresAnalyzer EXPORT FWCoreFrameworkTestFailuresAnalyzer DESTINATION  lib )
 
 add_library(FWCoreFrameworkHistoryAnalyzer SHARED 
   stubs/HistoryAnalyzer.cc
 )
 
 target_include_directories(FWCoreFrameworkHistoryAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreFrameworkHistoryAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(FWCoreFrameworkHistoryAnalyzer PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
@@ -658,8 +683,6 @@ target_link_libraries(FWCoreFrameworkHistoryAnalyzer PUBLIC
   ${PYTHON_LIBRARY}
   DataFormatsProvenance
 )
-
-install( TARGETS FWCoreFrameworkHistoryAnalyzer EXPORT FWCoreFrameworkHistoryAnalyzer DESTINATION  lib )
 
 add_executable(TestFWCoreFramework
   testRunner.cpp
@@ -678,36 +701,42 @@ add_executable(TestFWCoreFramework
 )
 
 target_include_directories(TestFWCoreFramework PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestFWCoreFramework PUBLIC ${CPPUNIT_INCLUDE_DIR})
-target_include_directories(TestFWCoreFramework PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFramework PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFramework PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFramework PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFramework PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFramework PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(TestFWCoreFramework PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFramework PUBLIC ${MD5_INCLUDE_DIR})
+target_include_directories(TestFWCoreFramework PUBLIC ${CPPUNIT_INCLUDE_DIR})
+include_directories(TestFWCoreFramework PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(TestFWCoreFramework PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFramework PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFramework PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFramework PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFramework PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
-  dl
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreParameterSet
-  FWCoreUtilities
+  dl
+  ${CPPUNIT_LIBRARY}
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  ${Boost_REGEX_LIBRARY_RELEASE}
   DataFormatsCommon
   FWCoreFramework
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
-  ${CPPUNIT_LIBRARY}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
-  DataFormatsWrappedStdDictionaries
   DataFormatsProvenance
   DataFormatsTestObjects
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   FWCoreVersion
+  FWCoreUtilities
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
+  DataFormatsWrappedStdDictionaries
 )
 
-install( TARGETS TestFWCoreFramework EXPORT TestFWCoreFramework DESTINATION  bin )
-
+add_test(NAME TestFWCoreFramework COMMAND TestFWCoreFramework)
 add_executable(TestFWCoreFrameworkeventsetup
   testRunner.cpp
   callback_t.cppunit.cc
@@ -726,51 +755,64 @@ add_executable(TestFWCoreFrameworkeventsetup
   eventsetupscontroller_t.cppunit.cc
 )
 
-target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${MD5_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${CPPUNIT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventsetup PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkeventsetup PUBLIC
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  ${Boost_REGEX_LIBRARY_RELEASE}
-  dl
-  ${CPPUNIT_LIBRARY}
-  FWCoreVersion
   FWCoreParameterSet
+  dl
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
+  FWCoreVersion
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
+  ${CPPUNIT_LIBRARY}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
   FWCoreFrameworkTestDummyForEventSetup
 )
 
-install( TARGETS TestFWCoreFrameworkeventsetup EXPORT TestFWCoreFrameworkeventsetup DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkeventsetup COMMAND TestFWCoreFrameworkeventsetup)
 add_executable(TestFWCoreFrameworkeventprocessor
   testRunner.cpp
   eventprocessor2_t.cppunit.cc
   eventprocessor_t.cppunit.cc
 )
 
-target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${MD5_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${CPPUNIT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventprocessor PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkeventprocessor PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
-  ${CPPUNIT_LIBRARY}
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   FWCoreFrameworkTest
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreUtilities
@@ -778,17 +820,16 @@ target_link_libraries(TestFWCoreFrameworkeventprocessor PUBLIC
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
+  ${CPPUNIT_LIBRARY}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${PYTHON_LIBRARY}
   DataFormatsWrappedStdDictionaries
+  ${PYTHON_LIBRARY}
   DataFormatsProvenance
 )
 
-install( TARGETS TestFWCoreFrameworkeventprocessor EXPORT TestFWCoreFrameworkeventprocessor DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkeventprocessor COMMAND TestFWCoreFrameworkeventprocessor)
 add_executable(TestFWCoreFrameworkeventprincipal
   testRunner.cpp
   eventprincipal_t.cppunit.cc
@@ -796,76 +837,90 @@ add_executable(TestFWCoreFrameworkeventprincipal
 )
 
 target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${CPPUNIT_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${MD5_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${CPPUNIT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkeventprincipal PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkeventprincipal PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
-  dl
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreParameterSet
-  FWCoreUtilities
+  dl
+  ${CPPUNIT_LIBRARY}
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  ${Boost_REGEX_LIBRARY_RELEASE}
   DataFormatsCommon
   FWCoreFramework
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
-  ${CPPUNIT_LIBRARY}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
   DataFormatsProvenance
   DataFormatsTestObjects
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   FWCoreVersion
+  FWCoreUtilities
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkeventprincipal EXPORT TestFWCoreFrameworkeventprincipal DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkeventprincipal COMMAND TestFWCoreFrameworkeventprincipal)
 add_executable(TestFWCoreFrameworkEvent
   Event_t.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${CPPUNIT_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEvent PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkEvent PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEvent PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEvent PUBLIC ${MD5_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${CPPUNIT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEvent PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkEvent PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkEvent PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEvent PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkEvent PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
-  dl
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   FWCoreParameterSet
-  FWCoreUtilities
+  dl
+  ${CPPUNIT_LIBRARY}
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  ${Boost_REGEX_LIBRARY_RELEASE}
   DataFormatsCommon
   FWCoreFramework
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
-  ${CPPUNIT_LIBRARY}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
-  DataFormatsWrappedStdDictionaries
   DataFormatsProvenance
   DataFormatsTestObjects
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   FWCoreVersion
+  FWCoreUtilities
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
+  DataFormatsWrappedStdDictionaries
 )
 
-install( TARGETS TestFWCoreFrameworkEvent EXPORT TestFWCoreFrameworkEvent DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkEvent COMMAND TestFWCoreFrameworkEvent)
 add_executable(TestFWCoreFrameworkView
   View_t.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkView PUBLIC ${CPPUNIT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkView PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkView PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkView PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkView PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -882,271 +937,301 @@ target_link_libraries(TestFWCoreFrameworkView PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestFWCoreFrameworkView EXPORT TestFWCoreFrameworkView DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkView COMMAND TestFWCoreFrameworkView)
 add_executable(TestFWCoreFrameworkCmsRun
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkCmsRun PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkCmsRun PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkCmsRun PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkCmsRun EXPORT TestFWCoreFrameworkCmsRun DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkCmsRun COMMAND TestFWCoreFrameworkCmsRun)
 add_executable(TestFWCoreFrameworkESRefer
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkESRefer PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkESRefer PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkESRefer PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkESRefer PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkESRefer PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkESRefer PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkESRefer PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkESRefer PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkESRefer PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkESRefer PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkESRefer PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkESRefer PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkESRefer PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkESRefer PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkESRefer EXPORT TestFWCoreFrameworkESRefer DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkESRefer COMMAND TestFWCoreFrameworkESRefer)
 add_executable(TestFWCoreFrameworkUnscheduled
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkUnscheduled PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkUnscheduled PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkUnscheduled PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkUnscheduled EXPORT TestFWCoreFrameworkUnscheduled DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkUnscheduled COMMAND TestFWCoreFrameworkUnscheduled)
 add_executable(TestFWCoreFrameworkGlobalStreamOne
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkGlobalStreamOne PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkGlobalStreamOne PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkGlobalStreamOne PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkGlobalStreamOne PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkGlobalStreamOne PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkGlobalStreamOne PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkGlobalStreamOne PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkGlobalStreamOne PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkGlobalStreamOne PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkGlobalStreamOne PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkGlobalStreamOne PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkGlobalStreamOne PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkGlobalStreamOne PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkGlobalStreamOne PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreFramework
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  FWCoreFramework
+  ${PYTHON_LIBRARY}
   DataFormatsWrappedStdDictionaries
 )
 
-install( TARGETS TestFWCoreFrameworkGlobalStreamOne EXPORT TestFWCoreFrameworkGlobalStreamOne DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkGlobalStreamOne COMMAND TestFWCoreFrameworkGlobalStreamOne)
 add_executable(TestFWCoreFrameworkMayConsumesDeadlock
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkMayConsumesDeadlock PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
-  ${PYTHON_LIBRARY}
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreFramework
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  FWCoreFramework
+  ${PYTHON_LIBRARY}
   DataFormatsWrappedStdDictionaries
 )
 
-install( TARGETS TestFWCoreFrameworkMayConsumesDeadlock EXPORT TestFWCoreFrameworkMayConsumesDeadlock DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkMayConsumesDeadlock COMMAND TestFWCoreFrameworkMayConsumesDeadlock)
 add_executable(TestFWCoreFrameworkReplace
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkReplace PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkReplace PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkReplace PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkReplace EXPORT TestFWCoreFrameworkReplace DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkReplace COMMAND TestFWCoreFrameworkReplace)
 add_executable(TestFWCoreFrameworkESProducerLooper
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkESProducerLooper PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkESProducerLooper PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkESProducerLooper PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkESProducerLooper PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkESProducerLooper PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkESProducerLooper PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkESProducerLooper PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkESProducerLooper PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkESProducerLooper PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkESProducerLooper PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkESProducerLooper PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkESProducerLooper PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkESProducerLooper PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkESProducerLooper PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkESProducerLooper EXPORT TestFWCoreFrameworkESProducerLooper DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkESProducerLooper COMMAND TestFWCoreFrameworkESProducerLooper)
 add_executable(TestFWCoreFrameworkTrigBit
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkTrigBit PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkTrigBit PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkTrigBit PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkTrigBit EXPORT TestFWCoreFrameworkTrigBit DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkTrigBit COMMAND TestFWCoreFrameworkTrigBit)
 add_executable(TestFWCoreFrameworkTrigMask
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkTrigMask PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkTrigMask PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkTrigMask PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkTrigMask PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkTrigMask PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkTrigMask PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkTrigMask PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkTrigMask PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkTrigMask PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkTrigMask PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkTrigMask PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkTrigMask PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkTrigMask PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkTrigMask PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkTrigMask EXPORT TestFWCoreFrameworkTrigMask DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkTrigMask COMMAND TestFWCoreFrameworkTrigMask)
 add_executable(TestXMLSafeException
   TestDriver.cpp
 )
 
 target_include_directories(TestXMLSafeException PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestXMLSafeException PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestXMLSafeException PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestXMLSafeException EXPORT TestXMLSafeException DESTINATION  bin )
-
+add_test(NAME TestXMLSafeException COMMAND TestXMLSafeException)
 add_executable(TestFWCoreFrameworkProductSelector
   ProductSelector_t.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkProductSelector PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkProductSelector PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
@@ -1158,24 +1243,29 @@ target_link_libraries(TestFWCoreFrameworkProductSelector PUBLIC
   DataFormatsProvenance
 )
 
-install( TARGETS TestFWCoreFrameworkProductSelector EXPORT TestFWCoreFrameworkProductSelector DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkProductSelector COMMAND TestFWCoreFrameworkProductSelector)
 add_executable(TestFWCoreFrameworkEventSelector
   EventSelector_t.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEventSelector PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkEventSelector PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
@@ -1188,24 +1278,29 @@ target_link_libraries(TestFWCoreFrameworkEventSelector PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestFWCoreFrameworkEventSelector EXPORT TestFWCoreFrameworkEventSelector DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkEventSelector COMMAND TestFWCoreFrameworkEventSelector)
 add_executable(TestFWCoreFrameworkEventSelWildcard
   EventSelWildcard_t.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEventSelWildcard PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkEventSelWildcard PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
@@ -1218,24 +1313,21 @@ target_link_libraries(TestFWCoreFrameworkEventSelWildcard PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestFWCoreFrameworkEventSelWildcard EXPORT TestFWCoreFrameworkEventSelWildcard DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkEventSelWildcard COMMAND TestFWCoreFrameworkEventSelWildcard)
 add_executable(TestFWCoreFrameworkEventSelExc
   EventSelExc_t.cpp
 )
 
-target_include_directories(TestFWCoreFrameworkEventSelExc PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkEventSelExc PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkEventSelExc PUBLIC ${Boost_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkEventSelExc PUBLIC ${MD5_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkEventSelExc PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkEventSelExc PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEventSelExc PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEventSelExc PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkEventSelExc PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
@@ -1248,24 +1340,29 @@ target_link_libraries(TestFWCoreFrameworkEventSelExc PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestFWCoreFrameworkEventSelExc EXPORT TestFWCoreFrameworkEventSelExc DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkEventSelExc COMMAND TestFWCoreFrameworkEventSelExc)
 add_executable(TestFWCoreFrameworkEventSelOverlap
   EventSelOverlap_t.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEventSelOverlap PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkEventSelOverlap PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreUtilities
   DataFormatsCommon
   FWCoreFramework
@@ -1278,19 +1375,19 @@ target_link_libraries(TestFWCoreFrameworkEventSelOverlap PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestFWCoreFrameworkEventSelOverlap EXPORT TestFWCoreFrameworkEventSelOverlap DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkEventSelOverlap COMMAND TestFWCoreFrameworkEventSelOverlap)
 add_executable(TestFWCoreFrameworkRegistryTemplate
   RegistryTemplate_t.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkRegistryTemplate PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkRegistryTemplate PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkRegistryTemplate PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
@@ -1302,17 +1399,21 @@ target_link_libraries(TestFWCoreFrameworkRegistryTemplate PUBLIC
   DataFormatsProvenance
 )
 
-install( TARGETS TestFWCoreFrameworkRegistryTemplate EXPORT TestFWCoreFrameworkRegistryTemplate DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkRegistryTemplate COMMAND TestFWCoreFrameworkRegistryTemplate)
 add_executable(TestFWCoreOutputModuleUtilities
   OutputModuleUtilities_t.cpp
 )
 
 target_include_directories(TestFWCoreOutputModuleUtilities PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(TestFWCoreOutputModuleUtilities PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreOutputModuleUtilities PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreOutputModuleUtilities PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreOutputModuleUtilities PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreOutputModuleUtilities PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestFWCoreOutputModuleUtilities PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreOutputModuleUtilities PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreOutputModuleUtilities PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreOutputModuleUtilities PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreOutputModuleUtilities PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -1327,17 +1428,21 @@ target_link_libraries(TestFWCoreOutputModuleUtilities PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestFWCoreOutputModuleUtilities EXPORT TestFWCoreOutputModuleUtilities DESTINATION  bin )
-
+add_test(NAME TestFWCoreOutputModuleUtilities COMMAND TestFWCoreOutputModuleUtilities)
 add_executable(TestFWCoreFrameworkStatemachine
   statemachine_t.cc
 )
 
 target_include_directories(TestFWCoreFrameworkStatemachine PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkStatemachine PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkStatemachine PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkStatemachine PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkStatemachine PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkStatemachine PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkStatemachine PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkStatemachine PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkStatemachine PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkStatemachine PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkStatemachine PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -1353,125 +1458,134 @@ target_link_libraries(TestFWCoreFrameworkStatemachine PUBLIC
   ${PYTHON_LIBRARY}
 )
 
-install( TARGETS TestFWCoreFrameworkStatemachine EXPORT TestFWCoreFrameworkStatemachine DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkStatemachine COMMAND TestFWCoreFrameworkStatemachine)
 add_executable(TestFWCoreFrameworkStatemachineSH
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkStatemachineSH PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkStatemachineSH PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkStatemachineSH PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkStatemachineSH EXPORT TestFWCoreFrameworkStatemachineSH DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkStatemachineSH COMMAND TestFWCoreFrameworkStatemachineSH)
 add_executable(TestFWCoreFrameworkInputTagFailure
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkInputTagFailure PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkInputTagFailure PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkInputTagFailure PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkInputTagFailure PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkInputTagFailure PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkInputTagFailure PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkInputTagFailure PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkInputTagFailure PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkInputTagFailure PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkInputTagFailure PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkInputTagFailure PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkInputTagFailure PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkInputTagFailure PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkInputTagFailure PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkInputTagFailure EXPORT TestFWCoreFrameworkInputTagFailure DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkInputTagFailure COMMAND TestFWCoreFrameworkInputTagFailure)
 add_executable(TestFWCoreFrameworkDeleteEarly
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkDeleteEarly PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkDeleteEarly PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkDeleteEarly PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkDeleteEarly EXPORT TestFWCoreFrameworkDeleteEarly DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkDeleteEarly COMMAND TestFWCoreFrameworkDeleteEarly)
 add_executable(TestFWCoreFrameworkEarlyTerminationSignal
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC ${PYTHON_INCLUDE_DIR})
-target_include_directories(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkEarlyTerminationSignal PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkEarlyTerminationSignal EXPORT TestFWCoreFrameworkEarlyTerminationSignal DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkEarlyTerminationSignal COMMAND TestFWCoreFrameworkEarlyTerminationSignal)
 add_executable(TestFWCoreFrameworkPrintDependencies
   TestDriver.cpp
 )
 
 target_include_directories(TestFWCoreFrameworkPrintDependencies PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestFWCoreFrameworkPrintDependencies PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(TestFWCoreFrameworkPrintDependencies PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreUtilities
   FWCoreFramework
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
+  FWCoreUtilities
   ${Boost_THREAD_LIBRARY_RELEASE}
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   ${PYTHON_LIBRARY}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
 )
 
-install( TARGETS TestFWCoreFrameworkPrintDependencies EXPORT TestFWCoreFrameworkPrintDependencies DESTINATION  bin )
-
+add_test(NAME TestFWCoreFrameworkPrintDependencies COMMAND TestFWCoreFrameworkPrintDependencies)

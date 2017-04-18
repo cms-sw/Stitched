@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 add_subdirectory(bin)
 if(BUILDTEST)
 add_subdirectory(test)
@@ -132,38 +134,43 @@ add_library(FWCoreFramework SHARED
 )
 
 target_include_directories(FWCoreFramework PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(FWCoreFramework PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(FWCoreFramework PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(FWCoreFramework PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(FWCoreFramework PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreFramework PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(FWCoreFramework PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(FWCoreFramework PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(FWCoreFramework PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(FWCoreFramework PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreFramework PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
-  dl
-  FWCoreMessageLogger
-  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  Thread
   FWCoreParameterSet
+  dl
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  Thread
+  ${Boost_REGEX_LIBRARY_RELEASE}
   DataFormatsCommon
   Tree
   ${Boost_THREAD_LIBRARY_RELEASE}
   MathCore
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   FWCoreServiceRegistry
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   Net
-  ${PYTHON_LIBRARY}
+  FWCoreCommon
   DataFormatsProvenance
   Core
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   FWCoreVersion
   ${Boost_PYTHON_LIBRARY_RELEASE}
+  ${PYTHON_LIBRARY}
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   FWCoreUtilities
   RIO
   FWCorePythonParameterSet
   FWCoreConcurrency
   FWCorePluginManager
-  FWCoreCommon
+  FWCoreMessageLogger
 )
 
 install( TARGETS FWCoreFramework EXPORT FWCoreFramework DESTINATION  lib )

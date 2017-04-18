@@ -3,9 +3,13 @@ add_executable(edmPluginDump
 )
 
 target_include_directories(edmPluginDump PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(edmPluginDump PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(edmPluginDump PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(edmPluginDump PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(edmPluginDump PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(edmPluginDump PUBLIC ${ROOT_INCLUDE_DIR})
 target_include_directories(edmPluginDump PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(edmPluginDump PUBLIC ${MD5_INCLUDE_DIR})
 target_link_libraries(edmPluginDump PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
@@ -27,6 +31,7 @@ add_executable(edmPluginRefresh
 )
 
 target_include_directories(edmPluginRefresh PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(edmPluginRefresh PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(edmPluginRefresh PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl

@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 if(BUILDTEST)
 add_subdirectory(test)
 endif()
@@ -53,28 +55,31 @@ add_library(DataFormatsProvenance SHARED
 
 add_dependencies(DataFormatsProvenance DataFormatsProvenanceDict)
 target_include_directories(DataFormatsProvenance PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(DataFormatsProvenance PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(DataFormatsProvenance PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(DataFormatsProvenance PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(DataFormatsProvenance PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(DataFormatsProvenance PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(DataFormatsProvenance PUBLIC
-  RIO
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
-  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   Thread
-  Core
-  FWCoreUtilities
   FWCoreMessageLogger
   Tree
-  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
-  ${Boost_PYTHON_LIBRARY_RELEASE}
   ${Boost_THREAD_LIBRARY_RELEASE}
   MathCore
   ${Boost_SYSTEM_LIBRARY_RELEASE}
   ${Boost_FILESYSTEM_LIBRARY_RELEASE}
-  ${TBB_LIBRARIES}
-  ${PYTHON_LIBRARY}
   Net
+  ${PYTHON_LIBRARY}
+  Core
+  ${Boost_IOSTREAMS_LIBRARY_RELEASE}
+  FWCoreUtilities
+  ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
+  ${Boost_PYTHON_LIBRARY_RELEASE}
+  RIO
+  ${TBB_LIBRARIES}
 )
 
 install( TARGETS DataFormatsProvenance EXPORT DataFormatsProvenance DESTINATION  lib )

@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 if(BUILDTEST)
 add_subdirectory(test)
 endif()
@@ -9,11 +11,13 @@ add_library(FWCoreTFWLiteSelector SHARED
 
 add_dependencies(FWCoreTFWLiteSelector FWCoreTFWLiteSelectorDict)
 target_include_directories(FWCoreTFWLiteSelector PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreTFWLiteSelector PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(FWCoreTFWLiteSelector PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(FWCoreTFWLiteSelector PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreTFWLiteSelector PUBLIC
-  Core
-  Thread
   FWCoreParameterSet
+  Thread
+  Core
   DataFormatsCommon
   FWCoreFramework
   Tree

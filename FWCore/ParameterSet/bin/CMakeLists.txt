@@ -3,15 +3,19 @@ add_executable(edmPluginHelp
 )
 
 target_include_directories(edmPluginHelp PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(edmPluginHelp PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(edmPluginHelp PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(edmPluginHelp PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(edmPluginHelp PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(edmPluginHelp PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(edmPluginHelp PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(edmPluginHelp PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(edmPluginHelp PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreUtilities
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}
@@ -29,12 +33,13 @@ add_executable(edmWriteConfigs
 )
 
 target_include_directories(edmWriteConfigs PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(edmWriteConfigs PUBLIC ${Boost_INCLUDE_DIR})
 target_link_libraries(edmWriteConfigs PUBLIC
-  ${Boost_REGEX_LIBRARY_RELEASE}
+  FWCoreParameterSet
   dl
   ${Boost_IOSTREAMS_LIBRARY_RELEASE}
   ${Boost_SERIALIZATION_LIBRARY_RELEASE}
-  FWCoreParameterSet
+  ${Boost_REGEX_LIBRARY_RELEASE}
   FWCoreUtilities
   ${Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE}
   ${Boost_PYTHON_LIBRARY_RELEASE}

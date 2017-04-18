@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 reflex_dictionary(DataFormatsStdDictionaries_pair src/classes_pair.h src/classes_def_pair.xml)
 reflex_dictionary(DataFormatsStdDictionaries_vector src/classes_vector.h src/classes_def_vector.xml)
 reflex_dictionary(DataFormatsStdDictionaries_map src/classes_map.h src/classes_def_map.xml)
@@ -14,6 +16,7 @@ add_dependencies(DataFormatsStdDictionaries DataFormatsStdDictionaries_vectorDic
 add_dependencies(DataFormatsStdDictionaries DataFormatsStdDictionaries_mapDict)
 add_dependencies(DataFormatsStdDictionaries DataFormatsStdDictionaries_othersDict)
 target_include_directories(DataFormatsStdDictionaries PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(DataFormatsStdDictionaries PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(DataFormatsStdDictionaries PUBLIC
   Core
   MathCore

@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 add_subdirectory(plugins)
 add_library(IOPoolStreamer SHARED 
   src/StreamerOutputFile.cc
@@ -18,18 +20,20 @@ add_library(IOPoolStreamer SHARED
 )
 
 target_include_directories(IOPoolStreamer PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(IOPoolStreamer PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(IOPoolStreamer PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(IOPoolStreamer PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(IOPoolStreamer PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(IOPoolStreamer PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(IOPoolStreamer PUBLIC
-  Core
+  FWCoreParameterSet
   FWCoreVersion
   Thread
-  FWCoreParameterSet
-  FWCoreUtilities
+  Core
   DataFormatsCommon
   FWCoreFramework
   Tree
-  FWCoreSources
+  FWCoreUtilities
   RIO
   MathCore
   FWCoreCatalog
@@ -40,6 +44,7 @@ target_link_libraries(IOPoolStreamer PUBLIC
   Net
   z
   DataFormatsProvenance
+  FWCoreSources
 )
 
 install( TARGETS IOPoolStreamer EXPORT IOPoolStreamer DESTINATION  lib )

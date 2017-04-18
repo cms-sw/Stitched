@@ -3,11 +3,10 @@ add_executable(TestRunnerFWCoreTFWLiteSelector
 )
 
 target_link_libraries(TestRunnerFWCoreTFWLiteSelector PUBLIC
+  FWCoreUtilities
   FWCoreFWLite
   FWCoreTFWLiteSelector
-  FWCoreUtilities
   FWCoreTFWLiteSelectorTest
 )
 
-install( TARGETS TestRunnerFWCoreTFWLiteSelector EXPORT TestRunnerFWCoreTFWLiteSelector DESTINATION  bin )
-
+add_test(NAME TestRunnerFWCoreTFWLiteSelector COMMAND TestRunnerFWCoreTFWLiteSelector)

@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 reflex_dictionary(FWCoreMessageLogger src/classes.h src/classes_def.xml)
 add_library(FWCoreMessageLogger SHARED 
   src/MessageDrop.cc
@@ -18,8 +20,11 @@ add_library(FWCoreMessageLogger SHARED
 
 add_dependencies(FWCoreMessageLogger FWCoreMessageLoggerDict)
 target_include_directories(FWCoreMessageLogger PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreMessageLogger PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(FWCoreMessageLogger PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(FWCoreMessageLogger PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(FWCoreMessageLogger PUBLIC ${TINYXML_INCLUDE_DIR})
+include_directories(FWCoreMessageLogger PUBLIC ${TINYXML_INCLUDE_DIR})
 target_link_libraries(FWCoreMessageLogger PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl

@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 reflex_dictionary(DataFormatsWrappedStdDictionaries src/classes.h src/classes_def.xml)
 add_library(DataFormatsWrappedStdDictionaries SHARED 
   DataFormatsWrappedStdDictionariesDict.cpp

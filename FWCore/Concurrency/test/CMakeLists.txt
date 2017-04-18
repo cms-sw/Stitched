@@ -5,45 +5,46 @@ add_executable(testFWCoreConcurrency
 )
 
 target_include_directories(testFWCoreConcurrency PUBLIC ${CPPUNIT_INCLUDE_DIR})
+include_directories(testFWCoreConcurrency PUBLIC ${CPPUNIT_INCLUDE_DIR})
 target_include_directories(testFWCoreConcurrency PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(testFWCoreConcurrency PUBLIC ${TBB_INCLUDE_DIRS})
 target_link_libraries(testFWCoreConcurrency PUBLIC
   FWCoreConcurrency
   ${CPPUNIT_LIBRARY}
 )
 
-install( TARGETS testFWCoreConcurrency EXPORT testFWCoreConcurrency DESTINATION  bin )
-
+add_test(NAME testFWCoreConcurrency COMMAND testFWCoreConcurrency)
 add_executable(test_xercesInitialize
   test_xercesInitialize.cpp
 )
 
 target_include_directories(test_xercesInitialize PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(test_xercesInitialize PUBLIC ${TBB_INCLUDE_DIRS})
 target_link_libraries(test_xercesInitialize PUBLIC
   FWCoreConcurrency
 )
 
-install( TARGETS test_xercesInitialize EXPORT test_xercesInitialize DESTINATION  bin )
-
+add_test(NAME test_xercesInitialize COMMAND test_xercesInitialize)
 add_executable(ThreadSafeAddOnlyContainer_t
   ThreadSafeAddOnlyContainer_t.cpp
 )
 
 target_include_directories(ThreadSafeAddOnlyContainer_t PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(ThreadSafeAddOnlyContainer_t PUBLIC ${TBB_INCLUDE_DIRS})
 target_link_libraries(ThreadSafeAddOnlyContainer_t PUBLIC
   FWCoreConcurrency
 )
 
-install( TARGETS ThreadSafeAddOnlyContainer_t EXPORT ThreadSafeAddOnlyContainer_t DESTINATION  bin )
-
+add_test(NAME ThreadSafeAddOnlyContainer_t COMMAND ThreadSafeAddOnlyContainer_t)
 add_executable(runStreamGrapherTest
   runStreamGrapherTest.cpp
 )
 
 target_include_directories(runStreamGrapherTest PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(runStreamGrapherTest PUBLIC ${TBB_INCLUDE_DIRS})
 target_link_libraries(runStreamGrapherTest PUBLIC
   FWCoreConcurrency
   FWCoreUtilities
 )
 
-install( TARGETS runStreamGrapherTest EXPORT runStreamGrapherTest DESTINATION  bin )
-
+add_test(NAME runStreamGrapherTest COMMAND runStreamGrapherTest)

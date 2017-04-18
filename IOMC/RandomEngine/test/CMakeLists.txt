@@ -3,13 +3,21 @@ add_library(IOMCRandomEngineTestRandomNumberServiceAnalyzer SHARED
 )
 
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${TINYXML_INCLUDE_DIR})
+include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${TINYXML_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${CLHEP_INCLUDE_DIR})
+include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${CLHEP_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC
   FWCoreParameterSet
   IOMCRandomEngine
@@ -20,20 +28,26 @@ target_link_libraries(IOMCRandomEngineTestRandomNumberServiceAnalyzer PUBLIC
   FWCoreUtilities
 )
 
-install( TARGETS IOMCRandomEngineTestRandomNumberServiceAnalyzer EXPORT IOMCRandomEngineTestRandomNumberServiceAnalyzer DESTINATION  lib )
-
 add_library(IOMCRandomEngineTestRandomNumberServiceGlobal SHARED 
   TestRandomNumberServiceGlobal.cc
 )
 
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${TINYXML_INCLUDE_DIR})
+include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${TINYXML_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${CLHEP_INCLUDE_DIR})
+include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${CLHEP_INCLUDE_DIR})
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC
   FWCoreParameterSet
   IOMCRandomEngine
@@ -44,20 +58,26 @@ target_link_libraries(IOMCRandomEngineTestRandomNumberServiceGlobal PUBLIC
   FWCoreUtilities
 )
 
-install( TARGETS IOMCRandomEngineTestRandomNumberServiceGlobal EXPORT IOMCRandomEngineTestRandomNumberServiceGlobal DESTINATION  lib )
-
 add_executable(TestIOMCRandomEngineService
   TestIOMCRandomEngineService.cpp
 )
 
 target_include_directories(TestIOMCRandomEngineService PUBLIC ${PYTHON_INCLUDE_DIR})
+include_directories(TestIOMCRandomEngineService PUBLIC ${PYTHON_INCLUDE_DIR})
 target_include_directories(TestIOMCRandomEngineService PUBLIC ${Boost_INCLUDE_DIR}/python)
+include_directories(TestIOMCRandomEngineService PUBLIC ${Boost_INCLUDE_DIR}/python)
 target_include_directories(TestIOMCRandomEngineService PUBLIC ${TINYXML_INCLUDE_DIR})
+include_directories(TestIOMCRandomEngineService PUBLIC ${TINYXML_INCLUDE_DIR})
 target_include_directories(TestIOMCRandomEngineService PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(TestIOMCRandomEngineService PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(TestIOMCRandomEngineService PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(TestIOMCRandomEngineService PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(TestIOMCRandomEngineService PUBLIC ${CLHEP_INCLUDE_DIR})
+include_directories(TestIOMCRandomEngineService PUBLIC ${CLHEP_INCLUDE_DIR})
 target_include_directories(TestIOMCRandomEngineService PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(TestIOMCRandomEngineService PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(TestIOMCRandomEngineService PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(TestIOMCRandomEngineService PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(TestIOMCRandomEngineService PUBLIC
   FWCoreParameterSet
   IOMCRandomEngine
@@ -68,5 +88,4 @@ target_link_libraries(TestIOMCRandomEngineService PUBLIC
   FWCoreUtilities
 )
 
-install( TARGETS TestIOMCRandomEngineService EXPORT TestIOMCRandomEngineService DESTINATION  bin )
-
+add_test(NAME TestIOMCRandomEngineService COMMAND TestIOMCRandomEngineService)

@@ -8,5 +8,4 @@ target_link_libraries(edmCatalogFileLocator_t PUBLIC
   FWCoreServiceRegistry
 )
 
-install( TARGETS edmCatalogFileLocator_t EXPORT edmCatalogFileLocator_t DESTINATION  bin )
-
+add_test(NAME edmCatalogFileLocator_t COMMAND edmCatalogFileLocator_t)

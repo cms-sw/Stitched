@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 add_subdirectory(bin)
 if(BUILDTEST)
 add_subdirectory(test)
@@ -47,20 +49,24 @@ add_library(FWCoreUtilities SHARED
   src/TimeOfDay.cc
 )
 
-target_include_directories(FWCoreUtilities PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(FWCoreUtilities PUBLIC ${TBB_INCLUDE_DIRS})
-target_include_directories(FWCoreUtilities PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(FWCoreUtilities PUBLIC ${TBB_INCLUDE_DIRS})
+target_include_directories(FWCoreUtilities PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreUtilities PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(FWCoreUtilities PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(FWCoreUtilities PUBLIC ${MD5_INCLUDE_DIR})
+target_include_directories(FWCoreUtilities PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(FWCoreUtilities PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreUtilities PUBLIC
   ${Boost_REGEX_LIBRARY_RELEASE}
   dl
-  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
+  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
   Thread
   Tree
   ${Boost_THREAD_LIBRARY_RELEASE}
   MathCore
   ${Boost_SYSTEM_LIBRARY_RELEASE}
-  ${Boost_SERIALIZATION_LIBRARY_RELEASE}
+  ${Boost_FILESYSTEM_LIBRARY_RELEASE}
   Net
   ${PYTHON_LIBRARY}
   Core

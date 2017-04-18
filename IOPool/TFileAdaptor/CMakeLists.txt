@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 if(BUILDTEST)
 add_subdirectory(test)
 endif()
@@ -12,10 +14,11 @@ add_library(IOPoolTFileAdaptor SHARED
 
 add_dependencies(IOPoolTFileAdaptor IOPoolTFileAdaptorDict)
 target_include_directories(IOPoolTFileAdaptor PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(IOPoolTFileAdaptor PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(IOPoolTFileAdaptor PUBLIC
-  Core
-  Thread
   FWCoreParameterSet
+  Thread
+  Core
   FWCoreMessageLogger
   Tree
   RIO

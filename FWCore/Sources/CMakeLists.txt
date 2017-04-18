@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 add_library(FWCoreSources SHARED 
   src/RawInputSource.cc
   src/EventSkipperByID.cc
@@ -11,14 +13,15 @@ add_library(FWCoreSources SHARED
 )
 
 target_include_directories(FWCoreSources PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(FWCoreSources PUBLIC ${TBB_INCLUDE_DIRS})
 target_link_libraries(FWCoreSources PUBLIC
   FWCoreParameterSet
   FWCoreCatalog
   FWCorePluginManager
-  FWCoreMessageLogger
+  ${TBB_LIBRARIES}
   FWCoreFramework
   DataFormatsProvenance
-  ${TBB_LIBRARIES}
+  FWCoreMessageLogger
   FWCoreUtilities
 )
 

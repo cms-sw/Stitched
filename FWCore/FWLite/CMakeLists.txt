@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR})
+include_directories(/usr/include/)
 add_subdirectory(bin)
 if(BUILDTEST)
 add_subdirectory(test)
@@ -15,20 +17,24 @@ add_library(FWCoreFWLite SHARED
 
 add_dependencies(FWCoreFWLite FWCoreFWLiteDict)
 target_include_directories(FWCoreFWLite PUBLIC ${MD5_INCLUDE_DIR})
+include_directories(FWCoreFWLite PUBLIC ${MD5_INCLUDE_DIR})
 target_include_directories(FWCoreFWLite PUBLIC ${Boost_INCLUDE_DIR})
+include_directories(FWCoreFWLite PUBLIC ${Boost_INCLUDE_DIR})
 target_include_directories(FWCoreFWLite PUBLIC ${TBB_INCLUDE_DIRS})
+include_directories(FWCoreFWLite PUBLIC ${TBB_INCLUDE_DIRS})
 target_include_directories(FWCoreFWLite PUBLIC ${ROOT_INCLUDE_DIR})
+include_directories(FWCoreFWLite PUBLIC ${ROOT_INCLUDE_DIR})
 target_link_libraries(FWCoreFWLite PUBLIC
   Core
-  Thread
-  DataFormatsCommon
-  Tree
-  FWCoreUtilities
-  RIO
   MathCore
+  Thread
+  RIO
+  DataFormatsProvenance
   FWCorePluginManager
   Net
-  DataFormatsProvenance
+  Tree
+  DataFormatsCommon
+  FWCoreUtilities
 )
 
 install( TARGETS FWCoreFWLite EXPORT FWCoreFWLite DESTINATION  lib )
