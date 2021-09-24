@@ -24,8 +24,8 @@ the worker is reset().
 #include "DataFormats/Provenance/interface/ModuleDescription.h"
 #include "FWCore/Common/interface/FWCoreCommonFwd.h"
 #include "FWCore/MessageLogger/interface/ExceptionMessages.h"
-#include "FWCore/Framework/src/TransitionInfoTypes.h"
-#include "FWCore/Framework/src/WorkerParams.h"
+#include "FWCore/Framework/interface/TransitionInfoTypes.h"
+#include "FWCore/Framework/interface/maker/WorkerParams.h"
 #include "FWCore/Framework/interface/ExceptionActions.h"
 #include "FWCore/Framework/interface/ModuleContextSentry.h"
 #include "FWCore/Framework/interface/OccurrenceTraits.h"
@@ -301,8 +301,6 @@ namespace edm {
     virtual void implRegisterThinnedAssociations(ProductRegistry const&, ThinnedAssociationsHelper&) = 0;
 
     virtual TaskQueueAdaptor serializeRunModule() = 0;
-
-    static void exceptionContext(cms::Exception& ex, ModuleCallingContext const* mcc);
 
     bool shouldRethrowException(std::exception_ptr iPtr, ParentContext const& parentContext, bool isEvent) const;
 
@@ -1131,7 +1129,7 @@ namespace edm {
         }
       });
     } catch (cms::Exception& ex) {
-      exceptionContext(ex, &moduleCallingContext_);
+      edm::exceptionContext(ex, moduleCallingContext_);
       if (shouldRethrowException(std::current_exception(), parentContext, T::isEvent_)) {
         assert(not cached_exception_);
         setException<T::isEvent_>(std::current_exception());
