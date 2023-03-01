@@ -1,0 +1,222 @@
+add_subdirectory(bin)
+if(BUILDTEST)
+  add_subdirectory(test)
+endif()
+
+add_library(FWCoreFramework SHARED ${FWCoreFramework_EXTRA_SOURCES}
+  src/Breakpoints.cc
+  src/ComponentMaker.cc
+  src/ConsumesCollector.cc
+  src/DataKey.cc
+  src/DataKeyTags.cc
+  src/DataProxy.cc
+  src/DataProxyProvider.cc
+  src/DelayedReader.cc
+  src/DependentRecordIntervalFinder.cc
+  src/EDConsumerBase.cc
+  src/EDLooper.cc
+  src/EDLooperBase.cc
+  src/ESHandle.cc
+  src/ESHandleExceptionFactory.cc
+  src/ESProducer.cc
+  src/ESProducerLooper.cc
+  src/ESProxyFactoryProducer.cc
+  src/ESRecordsToProxyIndices.cc
+  src/ESSourceDataProxyBase.cc
+  src/ESSourceDataProxyConcurrentBase.cc
+  src/ESSourceDataProxyNonConcurrentBase.cc
+  src/ESTagGetter.cc
+  src/ESValidHandle.cc
+  src/EarlyDeleteHelper.cc
+  src/EndPathStatusInserter.cc
+  src/Event.cc
+  src/EventForOutput.cc
+  src/EventForTransformer.cc
+  src/EventPrincipal.cc
+  src/EventProcessor.cc
+  src/EventSelector.cc
+  src/EventSetupImpl.cc
+  src/EventSetupProvider.cc
+  src/EventSetupProviderMaker.cc
+  src/EventSetupRecord.cc
+  src/EventSetupRecordIOVQueue.cc
+  src/EventSetupRecordImpl.cc
+  src/EventSetupRecordIntervalFinder.cc
+  src/EventSetupRecordKey.cc
+  src/EventSetupRecordProvider.cc
+  src/EventSetupsController.cc
+  src/ExceptionActions.cc
+  src/ExceptionHelpers.cc
+  src/Factory.cc
+  src/FileBlock.cc
+  src/GenericHandle.cc
+  src/GlobalSchedule.cc
+  src/HCTypeTag.cc
+  src/HistoryAppender.cc
+  src/IOVSyncValue.cc
+  src/InputSource.cc
+  src/InputSourceFactory.cc
+  src/IntersectingIOVRecordIntervalFinder.cc
+  src/LooperFactory.cc
+  src/LuminosityBlock.cc
+  src/LuminosityBlockForOutput.cc
+  src/LuminosityBlockPrincipal.cc
+  src/LuminosityBlockProcessingStatus.cc
+  src/MakeDataException.cc
+  src/MergeableRunProductMetadata.cc
+  src/MergeableRunProductProcesses.cc
+  src/ModuleChanger.cc
+  src/ModuleFactory.cc
+  src/ModuleHolder.cc
+  src/ModuleRegistry.cc
+  src/ModuleTypeResolverFactoryMaker.cc
+  src/NoDataException.cc
+  src/NoRecordException.cc
+  src/NumberOfConcurrentIOVs.cc
+  src/OccurrenceForOutput.cc
+  src/OutputModuleCommunicator.cc
+  src/OutputModuleCommunicatorT.cc
+  src/OutputModuleCore.cc
+  src/Path.cc
+  src/PathStatusInserter.cc
+  src/PathsAndConsumesOfModules.cc
+  src/Principal.cc
+  src/PrincipalCache.cc
+  src/PrincipalGetAdapter.cc
+  src/ProcessBlock.cc
+  src/ProcessBlockForOutput.cc
+  src/ProcessBlockPrincipal.cc
+  src/ProcessingController.cc
+  src/ProducerBase.cc
+  src/ProducesCollector.cc
+  src/ProductDeletedException.cc
+  src/ProductProvenanceRetriever.cc
+  src/ProductRegistryHelper.cc
+  src/ProductResolverBase.cc
+  src/ProductResolvers.cc
+  src/ProductSelector.cc
+  src/ProductSelectorRules.cc
+  src/RecordDependencyRegister.cc
+  src/Run.cc
+  src/RunForOutput.cc
+  src/RunPrincipal.cc
+  src/RunProcessingStatus.cc
+  src/Schedule.cc
+  src/ScheduleInfo.cc
+  src/ScheduleItems.cc
+  src/SharedResourcesRegistry.cc
+  src/SignallingProductRegistry.cc
+  src/SourceFactory.cc
+  src/StreamSchedule.cc
+  src/SubProcess.cc
+  src/SynchronousEventSetupsController.cc
+  src/SystemTimeKeeper.cc
+  src/TransformerBase.cc
+  src/TriggerNamesService.cc
+  src/TriggerResultInserter.cc
+  src/TriggerResultsBasedEventSelector.cc
+  src/UnscheduledAuxiliary.cc
+  src/ValidityInterval.cc
+  src/Worker.cc
+  src/WorkerInPath.cc
+  src/WorkerMaker.cc
+  src/WorkerManager.cc
+  src/WorkerRegistry.cc
+  src/WorkerT.cc
+  src/defaultCmsRunServices.cc
+  src/edmodule_mightGet_config.cc
+  src/ensureAvailableAccelerators.cc
+  src/exceptionContext.cc
+  src/getAllTriggerNames.cc
+  src/getProducerParameterSet.cc
+  src/global/EDAnalyzerBase.cc
+  src/global/EDFilterBase.cc
+  src/global/EDProducerBase.cc
+  src/global/OutputModuleBase.cc
+  src/global/analyzerImplementors.cc
+  src/global/filterImplementors.cc
+  src/global/outputmoduleImplementors.cc
+  src/global/producerImplementors.cc
+  src/insertSelectedProcesses.cc
+  src/limited/EDAnalyzerBase.cc
+  src/limited/EDFilterBase.cc
+  src/limited/EDProducerBase.cc
+  src/limited/OutputModuleBase.cc
+  src/limited/analyzerImplementors.cc
+  src/limited/filterImplementors.cc
+  src/limited/outputmoduleImplementors.cc
+  src/limited/producerImplementors.cc
+  src/makeModuleTypeResolverMaker.cc
+  src/one/EDAnalyzerBase.cc
+  src/one/EDFilterBase.cc
+  src/one/EDProducerBase.cc
+  src/one/OutputModuleBase.cc
+  src/one/analyzerImplementors.cc
+  src/one/filterImplementors.cc
+  src/one/outputmoduleImplementors.cc
+  src/one/producerImplementors.cc
+  src/processBlockUtilities.cc
+  src/processEDAliases.cc
+  src/resolverMaker.cc
+  src/stream/EDAnalyzerAdaptorBase.cc
+  src/stream/EDAnalyzerBase.cc
+  src/stream/EDFilterAdaptorBase.cc
+  src/stream/EDFilterBase.cc
+  src/stream/EDProducerAdaptorBase.cc
+  src/stream/EDProducerBase.cc
+  src/stream/ProducingModuleAdaptorBase.cc
+  src/stream/ProducingModuleHelper.cc
+)
+
+set_target_properties(FWCoreFramework PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+add_dependencies( ALL_LIBS FWCoreFramework)
+
+target_include_directories(FWCoreFramework PRIVATE ${CMAKE_SOURCE_DIR})
+
+target_include_directories(FWCoreFramework PUBLIC
+${Boost_INCLUDE_DIR}
+${Boost_INCLUDE_DIR}/python
+${CMSMD5_INCLUDE_DIR}
+${FMT_INCLUDE_DIR}
+${Python_INCLUDE_DIR}
+${ROOT_INCLUDE_DIR}
+${TBB_INCLUDE_DIRS}
+${TINYXML2_INCLUDE_DIR}
+${UUID_INCLUDE_DIR}
+/usr/include
+)
+
+target_link_libraries(FWCoreFramework PUBLIC
+${TBB_LIBRARIES}
+DataFormatsCommon
+DataFormatsProvenance
+FWCoreCommon
+FWCoreConcurrency
+FWCoreMessageLogger
+FWCoreParameterSet
+FWCorePluginManager
+FWCoreReflection
+FWCoreServiceRegistry
+FWCoreUtilities
+FWCoreVersion
+ROOT::Core
+ROOT::MathCore
+ROOT::Net
+ROOT::RIO
+ROOT::Thread
+ROOT::Tree
+Threads::Threads
+crypt
+dl
+nsl
+rt
+)
+
+
+add_python_rules(FWCore/Framework)
+
+add_script_rules(FWCore/Framework)
+
+install( TARGETS FWCoreFramework DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR} EXPORT stitched::)
+
